@@ -23,8 +23,8 @@ VallenatoStore/
 ├── index.html        → Inicio: hero + CTAs + métricas + destacadas + testimonios
 ├── historia.html     → Historia del vallenato + línea de tiempo
 ├── artistas.html     → 11 destacados + directorio de 44 (usando artistas.js)
-├── catalogo.html     → Catálogo de 15 productos con filtros por formato + formatos
-├── escuchar.html     → 14 muestras + Ranking Top 10 (botones [data-muestra])
+├── catalogo.html     → Catálogo de 24 productos con filtros por formato + formatos
+├── escuchar.html     → 27 muestras + Ranking Top 10 (botones [data-muestra])
 ├── pedido.html       → Checkout 2 columnas (formulario pasos + resumen/carrito)
 ├── contacto.html     → Contacto + boletín + FAQ
 ├── styles.css        → Hoja de estilos personalizada (paleta, componentes, responsive)
@@ -100,11 +100,11 @@ Navegación común: **Inicio · Historia · Artistas · Catálogo · Escuchar ·
 - **Directorio** (id `directorio`): buscador (`#buscarArtista`), filtros `[data-filtrar-tipo]`, contador (`#contadorArtistas`) y grilla `#grillaDirectorio` generada por `artistas.js`.
 
 **`catalogo.html`**
-- **Catálogo** (id `catalogo`): **15 productos** (títulos idénticos a las claves de `PRUEBAS_PRODUCTOS`). Filtros por formato (`[data-filtrar-formato]`: todos/vinilo/cd/digital) manejados por el script inline. Cada tarjeta: portada **1:1**, badge `.producto-format` (`cd`/`vinilo`/`digital`), `.card-title`, `.card-text`, `.precio` y botón **"Escuchar muestra"** inyectado por el reproductor. El botón circular de carrito (`btn-circulo`) enlaza a `pedido.html?producto=<título codificado>`.
+- **Catálogo** (id `catalogo`): **24 productos** (títulos idénticos a las claves de `PRUEBAS_PRODUCTOS`). Filtros por formato (`[data-filtrar-formato]`: todos/vinilo/cd/digital) manejados por el script inline. Cada tarjeta: portada **1:1**, badge `.producto-format` (`cd`/`vinilo`/`digital`), `.card-title`, `.card-text`, `.precio` y botón **"Escuchar muestra"** inyectado por el reproductor. El botón circular de carrito (`btn-circulo`) enlaza a `pedido.html?producto=<título codificado>`.
 - **Formatos** (id `formatos`): 3 tarjetas (Vinilo 180g, CD, Descarga digital) con listas de beneficios.
 
 **`escuchar.html`**
-- **Muestras** (id `escuchar`): **14 tarjetas** `.escucha-card` con `.escucha-thumb` (clic reproduce), duración 0:30 y enlaces a plataformas.
+- **Muestras** (id `escuchar`): **27 tarjetas** `.escucha-card` con `.escucha-thumb` (clic reproduce), duración 0:30 y enlaces a plataformas. Las miniaturas provienen de Apple Music (iTunes) `/300x300bb.jpg`.
 - **Ranking Top 10** (id `top`, fondo oscuro): lista numerada con tema, artista, badge, duración y **botón `.top-play` con `data-muestra`** (reproduce vía `vincularMuestrasGenericas()`).
 
 **`pedido.html`**
@@ -147,8 +147,8 @@ Navegación común: **Inicio · Historia · Artistas · Catálogo · Escuchar ·
 ## 7. Reproductor integrado (`reproductor.js`)
 
 - Tres mapas de pistas + enlace genérico:
-  - `PRUEBAS_ESCUCHAR`: canciones del `#escuchar` (14) y del Top 10. Clave = nombre de la canción.
-  - `PRUEBAS_PRODUCTOS`: canciones del `#catalogo` (15). Clave = `.card-title`.
+  - `PRUEBAS_ESCUCHAR`: canciones del `#escuchar` (27) y del Top 10. Clave = nombre de la canción.
+  - `PRUEBAS_PRODUCTOS`: canciones del `#catalogo` (24). Clave = `.card-title`.
   - `PRUEBAS_DESTACADOS`: artistas del `#artistas` (11). Clave = `.artista-nombre`.
 - Al cargar el DOM (`DOMContentLoaded`) vincula:
   - Miniaturas `.escucha-thumb` (clic reproduce con `preventDefault`).

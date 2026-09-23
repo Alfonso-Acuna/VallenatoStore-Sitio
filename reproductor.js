@@ -76,6 +76,71 @@
             tema: 'Mañanita de Invierno',
             artista: 'Poncho Zuleta',
             url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/d4/9e/54/d49e5468-1594-1418-48b6-69317c7bbc8d/mzaf_5616346879516115220.plus.aac.p.m4a'
+        },
+        'Así Fue Mi Querer': {
+            tema: 'Así Fue Mi Querer',
+            artista: 'Los Hermanos Zuleta',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview122/v4/4d/2e/f1/4d2ef16d-7a08-ef64-caf2-e98a2b68ae3b/mzaf_9070786284455171302.plus.aac.p.m4a'
+        },
+        'Mi Hermano y Yo': {
+            tema: 'Mi Hermano y Yo',
+            artista: 'Los Hermanos Zuleta',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/1b/3d/e1/1b3de188-97c4-bd70-0ad6-91f2647fc605/mzaf_2403724812487545640.plus.aac.p.m4a'
+        },
+        'Eres Todo': {
+            tema: 'Eres Todo',
+            artista: 'Iván Villazón & Iván Zuleta',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/42/fb/54/42fb5419-94d4-e4a3-e9a7-f15eaae21366/mzaf_9199818784169515505.plus.aac.p.m4a'
+        },
+        'No Me Pidas Que Te Olvide': {
+            tema: 'No Me Pidas Que Te Olvide',
+            artista: 'Iván Villazón & Saúl Lallemand',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/42/69/1b/42691be1-d773-de57-abd5-a45928eee6c0/mzaf_1704619357083582411.plus.aac.p.m4a'
+        },
+        'Nunca Niegues Que Te Amo': {
+            tema: 'Nunca Niegues Que Te Amo',
+            artista: 'Los Inquietos del Vallenato',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d2/2f/85/d22f856d-f908-f054-62e7-5027bb6c495c/mzaf_1987241821316245909.plus.aac.p.m4a'
+        },
+        'Cuéntame de Ti': {
+            tema: 'Cuéntame de Ti',
+            artista: 'Los Gigantes del Vallenato',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/c9/f2/f5/c9f2f520-2a71-e40b-9358-fa1d0e80873b/mzaf_15338822747920582311.plus.aac.p.m4a'
+        },
+        "Traga'o de Ti": {
+            tema: "Traga'o de Ti",
+            artista: 'Peter Manjarrés & Sergio Luis Rodríguez',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/63/d6/8d/63d68da1-7a05-afea-3d51-8b53a466e338/mzaf_16021758721536556145.plus.aac.p.m4a'
+        },
+        'Mi Diosa Humana': {
+            tema: 'Mi Diosa Humana',
+            artista: 'Miguel Morales & Juan David Herrera',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fc/b3/07/fcb3071b-d61f-5cd7-cc65-b150671dcebd/mzaf_4587106585037253580.plus.aac.p.m4a'
+        },
+        'Tarde Lo Conocí': {
+            tema: 'Tarde Lo Conocí',
+            artista: 'Patricia Teherán',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d9/32/09/d93209f4-5d02-74ed-3754-a01a318f18c3/mzaf_17253794552264662941.plus.aac.p.m4a'
+        },
+        'Ceniza Fría': {
+            tema: 'Ceniza Fría',
+            artista: 'Los Chiches Vallenatos',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d0/31/cd/d031cd90-4240-c36f-2c0d-1a4f13d93e3a/mzaf_15264273848863491836.plus.aac.p.m4a'
+        },
+        'Nido de Amor': {
+            tema: 'Nido de Amor',
+            artista: 'Jorge Oñate',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview112/v4/98/41/9a/98419a84-a228-d96f-0481-987468d2395c/mzaf_1802132741362451762.plus.aac.p.m4a'
+        },
+        'Si Tu Amor No Vuelve': {
+            tema: 'Si Tu Amor No Vuelve',
+            artista: 'Binomio de Oro de América',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/ab/7c/40/ab7c40f5-c01f-34ab-7353-e8d71aba5a1d/mzaf_5935213397155319939.plus.aac.p.m4a'
+        },
+        'Prisionero de Amor': {
+            tema: 'Prisionero de Amor',
+            artista: 'Farid Ortiz & Emilio Oviedo',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/af/5b/29/af5b29c2-bafd-59cd-be99-13f504a6c958/mzaf_12637783577151379744.plus.aac.p.m4a'
         }
     };
 
@@ -154,6 +219,51 @@
             tema: 'No Comprendí Tu Amor',
             artista: 'Jorge Oñate & Álvaro López',
             url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/9b/1e/74/9b1e74d3-17a8-21a2-34ff-f904067fd68f/mzaf_6345034557586251887.plus.aac.p.m4a'
+        },
+        'Aniversario': {
+            tema: 'Mi Hermano y Yo',
+            artista: 'Los Hermanos Zuleta',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/1b/3d/e1/1b3de188-97c4-bd70-0ad6-91f2647fc605/mzaf_2403724812487545640.plus.aac.p.m4a'
+        },
+        'Pa Que Te Enamores': {
+            tema: 'Eres Todo',
+            artista: 'Iván Villazón & Iván Zuleta',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/42/fb/54/42fb5419-94d4-e4a3-e9a7-f15eaae21366/mzaf_9199818784169515505.plus.aac.p.m4a'
+        },
+        'Siempre Gigantes': {
+            tema: 'Cuéntame de Ti',
+            artista: 'Los Gigantes del Vallenato',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/c9/f2/f5/c9f2f520-2a71-e40b-9358-fa1d0e80873b/mzaf_15338822747920582311.plus.aac.p.m4a'
+        },
+        'El Caballero del Vallenato': {
+            tema: "Traga'o de Ti",
+            artista: 'Peter Manjarrés & Sergio Luis Rodríguez',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/63/d6/8d/63d68da1-7a05-afea-3d51-8b53a466e338/mzaf_16021758721536556145.plus.aac.p.m4a'
+        },
+        'Grandes Éxitos de Los Chiches Vallenatos': {
+            tema: 'Ceniza Fría',
+            artista: 'Los Chiches Vallenatos',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d0/31/cd/d031cd90-4240-c36f-2c0d-1a4f13d93e3a/mzaf_15264273848863491836.plus.aac.p.m4a'
+        },
+        'Adiós a la Diosa': {
+            tema: 'Tarde Lo Conocí',
+            artista: 'Patricia Teherán',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/d9/32/09/d93209f4-5d02-74ed-3754-a01a318f18c3/mzaf_17253794552264662941.plus.aac.p.m4a'
+        },
+        'Mi Diosa Humana': {
+            tema: 'Mi Diosa Humana',
+            artista: 'Miguel Morales & Juan David Herrera',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview221/v4/fc/b3/07/fcb3071b-d61f-5cd7-cc65-b150671dcebd/mzaf_4587106585037253580.plus.aac.p.m4a'
+        },
+        'Volver a Triunfar': {
+            tema: 'Quiero Saber de Ti',
+            artista: 'Los Inquietos del Vallenato',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview211/v4/64/75/e7/6475e70f-25f7-5766-35ab-c27deaa3ecae/mzaf_7413372623321251256.plus.aac.p.m4a'
+        },
+        'El Invencible': {
+            tema: 'Se Te Fueron las Luces',
+            artista: 'Jorge Oñate',
+            url: 'https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview125/v4/a2/e9/0d/a2e90d02-f263-b004-a897-7434d8d8e9b7/mzaf_942794864993505369.plus.aac.p.m4a'
         }
     };
 

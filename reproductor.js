@@ -352,6 +352,17 @@
         });
     }
 
+    /* ---------- Botones [data-muestra] (Ranking Top 10, etc.) ---------- */
+    function vincularMuestrasGenericas() {
+        document.querySelectorAll('[data-muestra]').forEach(function (elemento) {
+            var pista = PRUEBAS_ESCUCHAR[elemento.getAttribute('data-muestra')];
+            if (!pista) { return; }
+            elemento.addEventListener('click', function () {
+                reproducir(pista.tema, pista.artista, pista.url);
+            });
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
         if (document.getElementById('reproductor')) {
             contRep = document.getElementById('reproductor');
@@ -382,5 +393,6 @@
         vincularSi(true);
         vincularSi(false);
         vincularArtistas();
+        vincularMuestrasGenericas();
     });
 })();

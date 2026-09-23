@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catálogo de VallenatoStore: vinilos 180g, CDs y descargas digitales de los grandes clásicos del vallenato con muestras de audio de 30 segundos.">
+    <meta name="author" content="Alfonso Acuña Arrieta">
+    <title>Catálogo de Álbumes | VallenatoStore</title>
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@300;400;500;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ================= ENCABEZADO / NAVBAR ================= -->
+    <header class="header-vallenato fixed-top shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <span class="brand-marca d-inline-flex align-items-center justify-content-center me-2"><i class="bi bi-disc-fill rotar"></i></span>
+                    <span class="brand-logo">VallenatoStore</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuContenido"
+                    aria-controls="menuContenido" aria-expanded="false" aria-label="Abrir menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="menuContenido">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-1">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="historia.html">Historia</a></li>
+                        <li class="nav-item"><a class="nav-link" href="artistas.html">Artistas</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="catalogo.html">Catálogo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="escuchar.html">Escuchar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pedido.html">Pedido</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                        <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                            <a class="btn btn-dorado btn-sm px-3" href="pedido.html"><i class="bi bi-cart-plus me-1"></i>Pedir ahora</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ================= CATÁLOGO ================= -->
+    <section id="catalogo" class="seccion">
+        <div class="container">
+            <header class="seccion-cabecera" data-aos="fade-up">
+                <p class="seccion-eyebrow">Tienda virtual</p>
+                <h2 class="titulo-seccion">Catálogo de álbumes</h2>
+                <p class="seccion-sub mx-auto">Vinilos, CDs y descargas digitales de ediciones originales. Filtra por formato y escucha una muestra de 30 segundos antes de pedir.</p>
+            </header>
+
+            <div class="filtros d-flex flex-wrap justify-content-center gap-2 mb-4" data-aos="fade-up" role="group" aria-label="Filtrar catálogo por formato">
+                <button type="button" class="filtro-btn active" data-filtrar-formato="todos"><i class="bi bi-grid-3x3-gap-fill me-1"></i>Todos</button>
+                <button type="button" class="filtro-btn" data-filtrar-formato="vinilo"><i class="bi bi-vinyl me-1"></i>Vinilos 180g</button>
+                <button type="button" class="filtro-btn" data-filtrar-formato="cd"><i class="bi bi-disc me-1"></i>CDs</button>
+                <button type="button" class="filtro-btn" data-filtrar-formato="digital"><i class="bi bi-cloud-download me-1"></i>Descargas</button>
+            </div>
+
+            <div id="grillaProductos" class="row g-4">
+                <!-- Cada producto reproduce su muestra vía reproductor.js -->
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="0">
+                    <article class="producto card h-100" data-formato="cd">
+                        <div class="producto-imagen">
+                            <img class="producto-cover" src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d4/15/84/d41584be-590b-bf6d-7a71-7c5fb1659ff4/0.jpg/300x300bb.jpg" alt="Portada del álbum 30 Mejores" loading="lazy">
+                            <span class="producto-format cd">CD</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-artista">Binomio de Oro</p>
+                            <h3 class="card-title">30 Mejores</h3>
+                            <p class="card-text">Recopilación de los éxitos infaltables del Binomio.</p>
+                            <div class="d-flex align-items-center justify-content-between mt-auto pt-2">
+                                <p class="precio mb-0">$75.000</p>
+                                <a class="btn btn-circulo" href="pedido.html?producto=30%20Mejores" aria-label="Pedir 30 Mejores"><i class="bi bi-cart-plus"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="40">
+                    <article class="producto card h-100" data-formato="cd">
+                        <div class="producto-imagen">
+                            <img class="producto-cover" src="https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/a4/93/49/a493492d-540c-5afa-c4c4-41842cfc05b9/886446879833.jpg/300x300bb.jpg" alt="Portada del álbum 30 Grandes Éxitos" loading="lazy">
+                            <span class="producto-format cd">CD</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-artista">Diomedes Díaz</p>
+                            <h3 class="card-title">30 Grandes Éxitos</h3>
+                            <p class="card-text">El Cacique en sus canciones más recordadas.</p>
+                            <div class="d-flex align-items-center justify-content-between mt-auto pt-2">
+                                <p class="precio mb-0">$65.000</p>
+                                <a class="btn btn-circulo" href="pedido.html?producto=30%20Grandes%20%C3%89xitos" aria-label="Pedir 30 Grandes Éxitos"><i class="bi bi-cart-plus"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+                    <article class="producto card h-100" data-formato="vinilo">
+                        <div class="producto-imagen">
+                            <img class="producto-cover" src="https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/a4/93/49/a493492d-540c-5afa-c4c4-41842cfc05b9/886446879833.jpg/300x300bb.jpg" alt="Portada del álbum Experiencias Vividas en vinilo" loading="lazy">
+                            <span class="producto-format vinilo">Vinilo 180g</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-artista">Diomedes Díaz &amp; Colacho Mendoza</p>
+                            <h3 class="card-title">Experiencias Vividas</h3>
+                            <p class="card-text">Clásico total de 1996, ahora en vinilo.</p>
+                            <div class="d-flex align-items-center justify-content-between mt-auto pt-2">
+                                <p class="precio mb-0">$120.000</p>
+                                <a class="btn btn-circulo" href="pedido.html?producto=Experiencias%20Vividas" aria-label="Pedir Experiencias Vividas"><i class="bi bi-cart-plus"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="120">
+                    <article class="producto card h-100" data-formato="cd">
+                        <div class="producto-imagen">
+                            <img class="producto-cover" src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d4/15/84/d41584be-590b-bf6d-7a71-7c5fb1659ff4/0.jpg/300x300bb.jpg" alt="Portada del álbum Un Canto Celestial" loading="lazy">
+                            <span class="producto-format cd">CD</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-artista">Diomedes Díaz &amp; Iván Zuleta</p>
+                            <h3 class="card-title">Un Canto Celestial</h3>
+                            <p class="card-text">Temas religiosos y amorosos en la voz del Cacique.</p>
+                            <div class="d-flex align-items-center justify-content-between mt-auto pt-2">
+                                <p class="precio mb-0">$85.000</p>
+                                <a class="btn btn-circulo" href="pedido.html?producto=Un%20Canto%20Celestial" aria-label="Pedir Un Canto Celestial"><i class="bi bi-cart-plus"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="0">
+                    <article class="producto card h-100" data-formato="vinilo">
+                        <div class="producto-imagen">
+                            <img class="producto-cover" src="https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/a4/93/49/a493492d-540c-5afa-c4c4-41842cfc05b9/886446879833.jpg/300x300bb.jpg" alt="Portada del álbum Título de Amor en vinilo" loading="lazy">
+                            <span class="producto-format vinilo">Vinilo 180g</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-artista">Diomedes Díaz &amp; Juancho Rois</p>
+                            <h3 class="card-title">Título de Amor</h3>
+                            <p class="card-text">El disco que marcó la dupla Diomedes-Rois.</p>
+                            <div class="d-flex align-items-center justify-content-between mt-auto pt-2">
+                                <p class="precio mb-0">$129.000</p>
+                                <a class="btn btn-circulo" href="pedido.html?producto=T%C3%ADtulo%20de%20Amor" aria-label="Pedir Título de Amor"><i class="bi bi-cart-plus"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="40">
+                    <article class="producto card h-100" data-formato="digital">
+                        <div class="producto-imagen">
+                            <img class="producto-cover" src="https://is1-ssl.mzstatic.com/image/thumb/Music211/d5/31/39/d53139f8-e17a-2d34-36c0-bcb0f1e93df1/196870783916_cover.jpg/300x300bb.jpg" alt="Portada del álbum Celedón Sin Fronteras" loading="lazy">
+                            <span class="producto-format digital">Descarga</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-artista">Jorge Celedón</p>
+                            <h3 class="card-title">Celedón Sin Fronteras</h3>
+                            <p class="card-text">Álbum que batió récords de la nueva era.</p>
+                            <div class="d-flex align-items-center justify-content-between mt-auto pt-2">
+                                <p class="precio mb-0">$60.000</p>
+                                <a class="btn btn-circulo" href="pedido.html?producto=Celed%C3%B3n%20Sin%20Fronteras" aria-label="Pedir Celedón Sin Fronteras"><i class="bi bi-cart-plus"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+                    <article class="producto card h-100" data-formato="vinilo">
+                        <div class="producto-imagen">
+                            <img class="producto-cover" src="https://is1-ssl.mzstatic.com/image/thumb/Music211/d5/31/39/d53139f8-e17a-2d34-36c0-bcb0f1e93df1/196870783916_cover.jpg/300x300bb.jpg" alt="Portada del álbum Llévame en Tus Sueños en vinilo" loading="lazy">
+                            <span class="producto-format vinilo">Vinilo 180g</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-artista">Jorge Celedón &amp; Jimmy Zambrano</p>
+                            <h3 class="card-title">Llévame en Tus Sueños</h3>
+                            <p class="card-text">Con el éxito «Cuatro Rosas» incluido.</p>
+                            <div class="d-flex align-items-center justify-content-between mt-auto pt-2">
+                                <p class="precio mb-0">$119.000</p>
+                                <a class="btn btn-circulo" href="pedido.html?producto=Ll%C3%A9vame%20en%20Tus%20Sue%C3%B1os" aria-label="Pedir Llévame en Tus Sueños"><i class="bi bi-cart-plus"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="120">
+                    <article class="producto card h-100" data-formato="cd">
+                        <div class="producto-imagen">
+                            <img class="producto-cover" src="https://is1-ssl.mzstatic.com/image/thumb/Music211/d5/31/39/d53139f8-e17a-2d34-36c0-bcb0f1e93df1/196870783916_cover.jpg/300x300bb.jpg" alt="Portada del álbum Los 30 Vallenatos de la Historia" loading="lazy">
+                            <span class="producto-format cd">CD</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-artista">Varios artistas</p>
+                            <h3 class="card-title">Los 30 Vallenatos de la Historia</h3>
+                            <p class="card-text">Doble CD con los himnos del género.</p>
+                            <div class="d-flex align-items-center justify-content-between mt-auto pt-2">
+                                <p class="precio mb-0">$99.000</p>
+                                <a class="btn btn-circulo" href="pedido.html?producto=Los%2030%20Vallenatos%20de%20la%20Historia" aria-label="Pedir Los 30 Vallenatos de la Historia"><i class="bi bi-cart-plus"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="0">
+                    <article class="producto card h-100" data-formato="cd">
+                        <div class="producto-imagen">
+                            <img class="producto-cover" src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/2e/cb/6f/2ecb6f8e-550a-4c52-ab6a-b41986fbac04/mzi.copfhxiq.jpg/300x300bb.jpg" alt="Portada del álbum La Hora de la Verdad" loading="lazy">
+                            <span class="producto-format cd">CD</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-artista">Kaleth Morales &amp; Andrés Herrera</p>
+                            <h3 class="card-title">La Hora de la Verdad</h3>
+                            <p class="card-text">El álbum de la Nueva Ola por excelencia.</p>
+                            <div class="d-flex align-items-center justify-content-between mt-auto pt-2">
+                                <p class="precio mb-0">$72.000</p>
+                                <a class="btn btn-circulo" href="pedido.html?producto=La%20Hora%20de%20la%20Verdad" aria-label="Pedir La Hora de la Verdad"><i class="bi bi-cart-plus"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="40">
+                    <article class="producto card h-100" data-formato="digital">
+                        <div class="producto-imagen">
+                            <img class="producto-cover" src="https://is1-ssl.mzstatic.com/image/thumb/Music20/v4/76/77/0a/76770af8-aa97-54f8-b7f9-e722726e09c8/mzm.edlkydau.jpg/300x300bb.jpg" alt="Portada del álbum Imparables" loading="lazy">
+                            <span class="producto-format digital">Descarga</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-artista">Martín Elías</p>
+                            <h3 class="card-title">Imparables</h3>
+                            <p class="card-text">El Terremoto con su sonido más fresco.</p>
+                            <div class="d-flex align-items-center justify-content-between mt-auto pt-2">
+                                <p class="precio mb-0">$55.000</p>
+                                <a class="btn btn-circulo" href="pedido.html?producto=Imparables" aria-label="Pedir Imparables"><i class="bi bi-cart-plus"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+                    <article class="producto card h-100" data-formato="vinilo">
+                        <div class="producto-imagen">
+                            <img class="producto-cover" src="https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/a5/33/fc/a533fcef-4fe5-f108-41d6-075ed0ab5320/886444497398.jpg/300x300bb.jpg" alt="Portada del álbum A Mi Manera en vinilo" loading="lazy">
+                            <span class="producto-format vinilo">Vinilo 180g</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-artista">Felipe Peláez &amp; Zabaleta</p>
+                            <h3 class="card-title">A Mi Manera</h3>
+                            <p class="card-text">Incluye el himno «El Amor Más Grande del Planeta».</p>
+                            <div class="d-flex align-items-center justify-content-between mt-auto pt-2">
+                                <p class="precio mb-0">$125.000</p>
+                                <a class="btn btn-circulo" href="pedido.html?producto=A%20Mi%20Manera" aria-label="Pedir A Mi Manera"><i class="bi bi-cart-plus"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="120">
+                    <article class="producto card h-100" data-formato="cd">
+                        <div class="producto-imagen">
+                            <img class="producto-cover" src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/27/52/91/27529196-d103-a793-5601-0e588981dd99/829410988254.png/300x300bb.jpg" alt="Portada del álbum 10 Años de Historia" loading="lazy">
+                            <span class="producto-format cd">CD</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-artista">Los Diablitos</p>
+                            <h3 class="card-title">10 Años de Historia</h3>
+                            <p class="card-text">Celebración con sus grandes temas.</p>
+                            <div class="d-flex align-items-center justify-content-between mt-auto pt-2">
+                                <p class="precio mb-0">$69.000</p>
+                                <a class="btn btn-circulo" href="pedido.html?producto=10%20A%C3%B1os%20de%20Historia" aria-label="Pedir 10 Años de Historia"><i class="bi bi-cart-plus"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="0">
+                    <article class="producto card h-100" data-formato="cd">
+                        <div class="producto-imagen">
+                            <img class="producto-cover" src="https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/f3/02/02/f30202c3-d21a-a57c-8f2e-bdd49480ff04/886445865219.jpg/300x300bb.jpg" alt="Portada del álbum Poncho Zuleta 45 Años" loading="lazy">
+                            <span class="producto-format cd">CD</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-artista">Poncho Zuleta</p>
+                            <h3 class="card-title">Poncho Zuleta 45 Años</h3>
+                            <p class="card-text">El Pollo Vallenato en su aniversario dorado.</p>
+                            <div class="d-flex align-items-center justify-content-between mt-auto pt-2">
+                                <p class="precio mb-0">$98.000</p>
+                                <a class="btn btn-circulo" href="pedido.html?producto=Poncho%20Zuleta%2045%20A%C3%B1os" aria-label="Pedir Poncho Zuleta 45 Años"><i class="bi bi-cart-plus"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="40">
+                    <article class="producto card h-100" data-formato="vinilo">
+                        <div class="producto-imagen">
+                            <img class="producto-cover" src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/2c/69/a1/2c69a185-54f0-3cc6-d417-c39ecc8c8d51/196874754009.jpg/300x300bb.jpg" alt="Portada del álbum La 9ª Batalla en vinilo" loading="lazy">
+                            <span class="producto-format vinilo">Vinilo 180g</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-artista">Silvestre Dangond &amp; Rolando Ochoa</p>
+                            <h3 class="card-title">La 9ª Batalla (En Vivo)</h3>
+                            <p class="card-text">La puesta en vivo que rompió récords.</p>
+                            <div class="d-flex align-items-center justify-content-between mt-auto pt-2">
+                                <p class="precio mb-0">$127.000</p>
+                                <a class="btn btn-circulo" href="pedido.html?producto=La%209%C2%AA%20Batalla%20(En%20Vivo)" aria-label="Pedir La 9ª Batalla en vivo"><i class="bi bi-cart-plus"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                <div class="col-6 col-md-4 col-lg-3" data-aos="fade-up" data-aos-delay="80">
+                    <article class="producto card h-100" data-formato="vinilo">
+                        <div class="producto-imagen">
+                            <img class="producto-cover" src="https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/90/bb/d5/90bbd5fe-3622-1aa5-58d4-f178acaea5e5/888880013514.jpg/300x300bb.jpg" alt="Portada del álbum Colección Top 50 en vinilo" loading="lazy">
+                            <span class="producto-format vinilo">Vinilo 180g</span>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <p class="card-artista">Jorge Oñate</p>
+                            <h3 class="card-title">Colección Top 50</h3>
+                            <p class="card-text">El Jilguero del Vallenato en un top 50 imbatible.</p>
+                            <div class="d-flex align-items-center justify-content-between mt-auto pt-2">
+                                <p class="precio mb-0">$115.000</p>
+                                <a class="btn btn-circulo" href="pedido.html?producto=Colecci%C3%B3n%20Top%2050" aria-label="Pedir Colección Top 50"><i class="bi bi-cart-plus"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= FORMATOS ================= -->
+    <section id="formatos" class="seccion seccion-alt">
+        <div class="container">
+            <header class="seccion-cabecera" data-aos="fade-up">
+                <p class="seccion-eyebrow">Elige tu formato</p>
+                <h2 class="titulo-seccion">Vinilo, CD o descarga</h2>
+                <p class="seccion-sub mx-auto">Cada formato con su encanto, siempre en ediciones originales.</p>
+            </header>
+            <div class="row g-4 mt-1">
+                <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="0">
+                    <div class="format-card text-center h-100">
+                        <div class="format-ico"><i class="bi bi-vinyl-fill"></i></div>
+                        <h4>Vinilo 180g</h4>
+                        <p>Prensajes de alta fidelidad, portada original y empaque protector. Para el coleccionista que quiere sonido y arte.</p>
+                        <ul class="format-list text-start">
+                            <li><i class="bi bi-check2-circle"></i> Remasterizado 2025</li>
+                            <li><i class="bi bi-check2-circle"></i> Funda premium con arte original</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="format-card text-center h-100">
+                        <div class="format-ico"><i class="bi bi-disc"></i></div>
+                        <h4>CD digital físico</h4>
+                        <p>El clásico para tu equipo de sonido o tu carro. Incluye libreto con letras y portada doble.</p>
+                        <ul class="format-list text-start">
+                            <li><i class="bi bi-check2-circle"></i> Edición original colombiana</li>
+                            <li><i class="bi bi-check2-circle"></i> Libreto con créditos y letras</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="format-card text-center h-100">
+                        <div class="format-ico"><i class="bi bi-cloud-arrow-down"></i></div>
+                        <h4>Descarga digital</h4>
+                        <p>Recíbelo al instante por correo en MP3 320 kbps. Para llevar el vallenato siempre contigo.</p>
+                        <ul class="format-list text-start">
+                            <li><i class="bi bi-check2-circle"></i> Entrega inmediata</li>
+                            <li><i class="bi bi-check2-circle"></i> MP3 320 kbps</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5" data-aos="fade-up">
+                <a href="pedido.html" class="btn btn-dorado btn-lg px-4"><i class="bi bi-cart-check me-1"></i>Hacer mi pedido</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PIE DE PÁGINA ================= -->
+    <footer class="footer py-5 text-white">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-12 col-lg-4">
+                    <a class="navbar-brand d-flex align-items-center mb-2" href="index.html">
+                        <span class="brand-marca d-inline-flex align-items-center justify-content-center me-2"><i class="bi bi-disc-fill rotar"></i></span>
+                        <span class="brand-logo">VallenatoStore</span>
+                    </a>
+                    <p class="small footer-texto">Tu tienda de confianza para vinilos, CDs y música vallenata. Más de 15 años haciendo latir el acordeón en cada hogar.</p>
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="#" class="red-social" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="red-social" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="red-social" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                        <a href="#" class="red-social" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2 offset-lg-1">
+                    <h6 class="footer-titulo">Enlaces</h6>
+                    <ul class="footer-lista">
+                        <li><a href="index.html"><i class="bi bi-chevron-right"></i> Inicio</a></li>
+                        <li><a href="historia.html"><i class="bi bi-chevron-right"></i> Historia</a></li>
+                        <li><a href="artistas.html"><i class="bi bi-chevron-right"></i> Artistas</a></li>
+                        <li><a href="catalogo.html"><i class="bi bi-chevron-right"></i> Catálogo</a></li>
+                        <li><a href="pedido.html"><i class="bi bi-chevron-right"></i> Hacer pedido</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="footer-titulo">Categorías</h6>
+                    <ul class="footer-lista">
+                        <li><a href="catalogo.html"><i class="bi bi-chevron-right"></i> CDs de vallenato</a></li>
+                        <li><a href="catalogo.html"><i class="bi bi-chevron-right"></i> Vinilos 180g</a></li>
+                        <li><a href="catalogo.html"><i class="bi bi-chevron-right"></i> Descargas</a></li>
+                        <li><a href="escuchar.html#top"><i class="bi bi-chevron-right"></i> Ranking Top 10</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-3">
+                    <h6 class="footer-titulo">Atención</h6>
+                    <ul class="footer-lista">
+                        <li><i class="bi bi-geo-alt me-1 text-dorado"></i> Magangué, Bolívar – Colombia</li>
+                        <li><i class="bi bi-telephone me-1 text-dorado"></i> +57 300 123 4567</li>
+                        <li><i class="bi bi-truck me-1 text-dorado"></i> Envíos a todo el país</li>
+                        <li><i class="bi bi-clock me-1 text-dorado"></i> Lun–Sáb · 8:00 – 18:00</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-secondary-subtle my-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <p class="mb-0 small"><span class="brand-logo me-1">VallenatoStore</span> © 2011–2026 · Todos los derechos reservados.</p>
+                <p class="mb-0 small footer-credito">Creado por <strong class="footer-credito">Alfonso Acuña Arrieta</strong> · Hecho con <i class="bi bi-heart-fill mx-1"></i> en la tierra del vallenato</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button id="btnVolver" class="btn-volver" aria-label="Volver arriba"><i class="bi bi-arrow-up"></i></button>
+
+    <!-- Filtros por formato del catálogo -->
+    <script>
+        (function () {
+            'use strict';
+            var botones = document.querySelectorAll('[data-filtrar-formato]');
+            var grilla = document.getElementById('grillaProductos');
+
+            function aplicar(formato) {
+                if (!grilla) { return; }
+                var productos = grilla.querySelectorAll('.producto');
+                for (var i = 0; i < productos.length; i++) {
+                    productos[i].classList.toggle('d-none', formato !== 'todos' && productos[i].getAttribute('data-formato') !== formato);
+                }
+            }
+
+            botones.forEach(function (boton) {
+                boton.addEventListener('click', function () {
+                    botones.forEach(function (b) { b.classList.remove('active'); });
+                    boton.classList.add('active');
+                    aplicar(boton.getAttribute('data-filtrar-formato'));
+                });
+            });
+        })();
+    </script>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="main.js"></script>
+    <script src="reproductor.js"></script>
+</body>
+</html>

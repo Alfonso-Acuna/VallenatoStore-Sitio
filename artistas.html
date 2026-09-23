@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Directorio de 44 solistas y agrupaciones del vallenato con su discografía y enlaces a plataformas. Búscalos y escucha sus clásicos.">
+    <meta name="author" content="Alfonso Acuña Arrieta">
+    <title>Artistas del Vallenato | VallenatoStore</title>
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@300;400;500;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ================= ENCABEZADO / NAVBAR ================= -->
+    <header class="header-vallenato fixed-top shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <span class="brand-marca d-inline-flex align-items-center justify-content-center me-2"><i class="bi bi-disc-fill rotar"></i></span>
+                    <span class="brand-logo">VallenatoStore</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuContenido"
+                    aria-controls="menuContenido" aria-expanded="false" aria-label="Abrir menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="menuContenido">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-1">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="historia.html">Historia</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="artistas.html">Artistas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="catalogo.html">Catálogo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="escuchar.html">Escuchar</a></li>
+                        <li class="nav-item"><a class="nav-link" href="pedido.html">Pedido</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                        <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                            <a class="btn btn-dorado btn-sm px-3" href="pedido.html"><i class="bi bi-cart-plus me-1"></i>Pedir ahora</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ================= ARTISTAS DESTACADOS ================= -->
+    <section id="artistas" class="seccion">
+        <div class="container">
+            <header class="seccion-cabecera" data-aos="fade-up">
+                <p class="seccion-eyebrow">Los más buscados</p>
+                <h2 class="titulo-seccion">Artistas destacados</h2>
+                <p class="seccion-sub mx-auto">Un homenaje a las voces y agrupaciones que construyeron la leyenda. Toca el botón para escuchar una muestra de sus clásicos.</p>
+            </header>
+            <div class="row g-4 mt-1 justify-content-center">
+                <div class="col-6 col-md-4 col-lg-2-4" data-aos="fade-up" data-aos-delay="0">
+                    <div class="artista-card text-center">
+                        <img class="artista-foto" src="https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/a4/93/49/a493492d-540c-5afa-c4c4-41842cfc05b9/886446879833.jpg/300x300bb.jpg" alt="Diomedes Díaz">
+                        <h3 class="artista-nombre">Diomedes Díaz</h3>
+                        <p class="small text-muted mb-3">El Cacique de La Junta</p>
+                        <div class="artista-redes">
+                            <a class="spotify" href="https://open.spotify.com/search/Diomedes%20D%C3%ADaz" target="_blank" rel="noopener" aria-label="Diomedes Díaz en Spotify"><i class="bi bi-spotify"></i></a>
+                            <a class="apple" href="https://music.apple.com/us/search?term=Diomedes%20D%C3%ADaz" target="_blank" rel="noopener" aria-label="Diomedes Díaz en Apple Music"><i class="bi bi-apple"></i></a>
+                            <a class="youtube" href="https://www.youtube.com/results?search_query=Diomedes%20D%C3%ADaz%20vallenato" target="_blank" rel="noopener" aria-label="Diomedes Díaz en YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2-4" data-aos="fade-up" data-aos-delay="40">
+                    <div class="artista-card text-center">
+                        <img class="artista-foto" src="https://is1-ssl.mzstatic.com/image/thumb/Music/61/8a/93/mzi.lxwtgmyr.jpg/300x300bb.jpg" alt="Jorge Celedón">
+                        <h3 class="artista-nombre">Jorge Celedón</h3>
+                        <p class="small text-muted mb-3">Voz del Binomio, hoy solista</p>
+                        <div class="artista-redes">
+                            <a class="spotify" href="https://open.spotify.com/search/Jorge%20Celed%C3%B3n" target="_blank" rel="noopener" aria-label="Jorge Celedón en Spotify"><i class="bi bi-spotify"></i></a>
+                            <a class="apple" href="https://music.apple.com/us/search?term=Jorge%20Celed%C3%B3n" target="_blank" rel="noopener" aria-label="Jorge Celedón en Apple Music"><i class="bi bi-apple"></i></a>
+                            <a class="youtube" href="https://www.youtube.com/results?search_query=Jorge%20Celed%C3%B3n%20vallenato" target="_blank" rel="noopener" aria-label="Jorge Celedón en YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2-4" data-aos="fade-up" data-aos-delay="80">
+                    <div class="artista-card text-center">
+                        <img class="artista-foto" src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/43/1f/fd/431ffd34-9299-3570-23a7-d486b023c81a/829410648561.png/300x300bb.jpg" alt="Binomio de Oro">
+                        <h3 class="artista-nombre">Binomio de Oro</h3>
+                        <p class="small text-muted mb-3">Fundado por Rafael Orozco</p>
+                        <div class="artista-redes">
+                            <a class="spotify" href="https://open.spotify.com/search/Binomio%20de%20Oro" target="_blank" rel="noopener" aria-label="Binomio de Oro en Spotify"><i class="bi bi-spotify"></i></a>
+                            <a class="apple" href="https://music.apple.com/us/search?term=Binomio%20de%20Oro" target="_blank" rel="noopener" aria-label="Binomio de Oro en Apple Music"><i class="bi bi-apple"></i></a>
+                            <a class="youtube" href="https://www.youtube.com/results?search_query=Binomio%20de%20Oro%20vallenato" target="_blank" rel="noopener" aria-label="Binomio de Oro en YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2-4" data-aos="fade-up" data-aos-delay="120">
+                    <div class="artista-card text-center">
+                        <img class="artista-foto" src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/2c/69/a1/2c69a185-54f0-3cc6-d417-c39ecc8c8d51/196874754009.jpg/300x300bb.jpg" alt="Silvestre Dangond">
+                        <h3 class="artista-nombre">Silvestre Dangond</h3>
+                        <p class="small text-muted mb-3">Referente de la Nueva Ola</p>
+                        <div class="artista-redes">
+                            <a class="spotify" href="https://open.spotify.com/search/Silvestre%20Dangond" target="_blank" rel="noopener" aria-label="Silvestre Dangond en Spotify"><i class="bi bi-spotify"></i></a>
+                            <a class="apple" href="https://music.apple.com/us/search?term=Silvestre%20Dangond" target="_blank" rel="noopener" aria-label="Silvestre Dangond en Apple Music"><i class="bi bi-apple"></i></a>
+                            <a class="youtube" href="https://www.youtube.com/results?search_query=Silvestre%20Dangond%20vallenato" target="_blank" rel="noopener" aria-label="Silvestre Dangond en YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2-4" data-aos="fade-up" data-aos-delay="160">
+                    <div class="artista-card text-center">
+                        <img class="artista-foto" src="https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/2e/cb/6f/2ecb6f8e-550a-4c52-ab6a-b41986fbac04/mzi.copfhxiq.jpg/300x300bb.jpg" alt="Kaleth Morales">
+                        <h3 class="artista-nombre">Kaleth Morales</h3>
+                        <p class="small text-muted mb-3">El Rey de la Nueva Ola</p>
+                        <div class="artista-redes">
+                            <a class="spotify" href="https://open.spotify.com/search/Kaleth%20Morales" target="_blank" rel="noopener" aria-label="Kaleth Morales en Spotify"><i class="bi bi-spotify"></i></a>
+                            <a class="apple" href="https://music.apple.com/us/search?term=Kaleth%20Morales" target="_blank" rel="noopener" aria-label="Kaleth Morales en Apple Music"><i class="bi bi-apple"></i></a>
+                            <a class="youtube" href="https://www.youtube.com/results?search_query=Kaleth%20Morales%20vallenato" target="_blank" rel="noopener" aria-label="Kaleth Morales en YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="artista-card text-center">
+                        <img class="artista-foto" src="https://is1-ssl.mzstatic.com/image/thumb/Music20/v4/76/77/0a/76770af8-aa97-54f8-b7f9-e722726e09c8/mzm.edlkydau.jpg/300x300bb.jpg" alt="Martín Elías">
+                        <h3 class="artista-nombre">Martín Elías</h3>
+                        <p class="small text-muted mb-3">El Terremoto del Vallenato</p>
+                        <div class="artista-redes">
+                            <a class="spotify" href="https://open.spotify.com/search/Mart%C3%ADn%20El%C3%ADas" target="_blank" rel="noopener" aria-label="Martín Elías en Spotify"><i class="bi bi-spotify"></i></a>
+                            <a class="apple" href="https://music.apple.com/us/search?term=Mart%C3%ADn%20El%C3%ADas" target="_blank" rel="noopener" aria-label="Martín Elías en Apple Music"><i class="bi bi-apple"></i></a>
+                            <a class="youtube" href="https://www.youtube.com/results?search_query=Mart%C3%ADn%20El%C3%ADas%20vallenato" target="_blank" rel="noopener" aria-label="Martín Elías en YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2-4" data-aos="fade-up" data-aos-delay="240">
+                    <div class="artista-card text-center">
+                        <img class="artista-foto" src="https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/a5/33/fc/a533fcef-4fe5-f108-41d6-075ed0ab5320/886444497398.jpg/300x300bb.jpg" alt="Felipe Peláez">
+                        <h3 class="artista-nombre">Felipe Peláez</h3>
+                        <p class="small text-muted mb-3">Vallenato romántico moderno</p>
+                        <div class="artista-redes">
+                            <a class="spotify" href="https://open.spotify.com/search/Felipe%20Pel%C3%A1ez" target="_blank" rel="noopener" aria-label="Felipe Peláez en Spotify"><i class="bi bi-spotify"></i></a>
+                            <a class="apple" href="https://music.apple.com/us/search?term=Felipe%20Pel%C3%A1ez" target="_blank" rel="noopener" aria-label="Felipe Peláez en Apple Music"><i class="bi bi-apple"></i></a>
+                            <a class="youtube" href="https://www.youtube.com/results?search_query=Felipe%20Pel%C3%A1ez%20vallenato" target="_blank" rel="noopener" aria-label="Felipe Peláez en YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2-4" data-aos="fade-up" data-aos-delay="280">
+                    <div class="artista-card text-center">
+                        <img class="artista-foto" src="https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/dc/6f/11/dc6f1158-2195-ce5a-3936-a94375ff350e/mzi.retdgwwj.jpg/300x300bb.jpg" alt="Jean Carlos Centeno">
+                        <h3 class="artista-nombre">Jean Carlos Centeno</h3>
+                        <p class="small text-muted mb-3">Voz del Binomio y solista</p>
+                        <div class="artista-redes">
+                            <a class="spotify" href="https://open.spotify.com/search/Jean%20Carlos%20Centeno" target="_blank" rel="noopener" aria-label="Jean Carlos Centeno en Spotify"><i class="bi bi-spotify"></i></a>
+                            <a class="apple" href="https://music.apple.com/us/search?term=Jean%20Carlos%20Centeno" target="_blank" rel="noopener" aria-label="Jean Carlos Centeno en Apple Music"><i class="bi bi-apple"></i></a>
+                            <a class="youtube" href="https://www.youtube.com/results?search_query=Jean%20Carlos%20Centeno%20vallenato" target="_blank" rel="noopener" aria-label="Jean Carlos Centeno en YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2-4" data-aos="fade-up" data-aos-delay="320">
+                    <div class="artista-card text-center">
+                        <img class="artista-foto" src="https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/c6/d1/fa/c6d1fa4f-5751-e241-1a84-ef5488514547/198846408705.jpg/300x300bb.jpg" alt="Nelson Velásquez">
+                        <h3 class="artista-nombre">Nelson Velásquez</h3>
+                        <p class="small text-muted mb-3">Cofundador de Los Inquietos</p>
+                        <div class="artista-redes">
+                            <a class="spotify" href="https://open.spotify.com/search/Nelson%20Vel%C3%A1squez" target="_blank" rel="noopener" aria-label="Nelson Velásquez en Spotify"><i class="bi bi-spotify"></i></a>
+                            <a class="apple" href="https://music.apple.com/us/search?term=Nelson%20Vel%C3%A1squez" target="_blank" rel="noopener" aria-label="Nelson Velásquez en Apple Music"><i class="bi bi-apple"></i></a>
+                            <a class="youtube" href="https://www.youtube.com/results?search_query=Nelson%20Vel%C3%A1squez%20vallenato" target="_blank" rel="noopener" aria-label="Nelson Velásquez en YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2-4" data-aos="fade-up" data-aos-delay="360">
+                    <div class="artista-card text-center">
+                        <img class="artista-foto" src="https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/27/52/91/27529196-d103-a793-5601-0e588981dd99/829410988254.png/300x300bb.jpg" alt="Los Diablitos">
+                        <h3 class="artista-nombre">Los Diablitos</h3>
+                        <p class="small text-muted mb-3">Fundados por Omar Geles</p>
+                        <div class="artista-redes">
+                            <a class="spotify" href="https://open.spotify.com/search/Los%20Diablitos" target="_blank" rel="noopener" aria-label="Los Diablitos en Spotify"><i class="bi bi-spotify"></i></a>
+                            <a class="apple" href="https://music.apple.com/us/search?term=Los%20Diablitos" target="_blank" rel="noopener" aria-label="Los Diablitos en Apple Music"><i class="bi bi-apple"></i></a>
+                            <a class="youtube" href="https://www.youtube.com/results?search_query=Los%20Diablitos%20vallenato" target="_blank" rel="noopener" aria-label="Los Diablitos en YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="artista-card text-center">
+                        <img class="artista-foto" src="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/64/12/18/641218b0-3d0c-3880-c630-d27006a6d810/829410690355.png/300x300bb.jpg" alt="Miguel Morales">
+                        <h3 class="artista-nombre">Miguel Morales</h3>
+                        <p class="small text-muted mb-3">La Voz, cofundador de Los Diablitos</p>
+                        <div class="artista-redes">
+                            <a class="spotify" href="https://open.spotify.com/search/Miguel%20Morales" target="_blank" rel="noopener" aria-label="Miguel Morales en Spotify"><i class="bi bi-spotify"></i></a>
+                            <a class="apple" href="https://music.apple.com/us/search?term=Miguel%20Morales" target="_blank" rel="noopener" aria-label="Miguel Morales en Apple Music"><i class="bi bi-apple"></i></a>
+                            <a class="youtube" href="https://www.youtube.com/results?search_query=Miguel%20Morales%20vallenato" target="_blank" rel="noopener" aria-label="Miguel Morales en YouTube"><i class="bi bi-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= DIRECTORIO ================= -->
+    <section id="directorio" class="seccion seccion-alt">
+        <div class="container">
+            <header class="seccion-cabecera" data-aos="fade-up">
+                <p class="seccion-eyebrow">Directorio completo</p>
+                <h2 class="titulo-seccion">44 artistas y agrupaciones</h2>
+                <p class="seccion-sub mx-auto">Busca por nombre o alias y filtra entre solistas y agrupaciones. Despliega la discografía de cada uno.</p>
+            </header>
+
+            <div class="row justify-content-center g-3 mb-4" data-aos="fade-up">
+                <div class="col-12 col-lg-5">
+                    <div class="input-group buscador-artista">
+                        <span class="input-group-text" id="iconoBuscar"><i class="bi bi-search"></i></span>
+                        <input type="search" class="form-control" id="buscarArtista" placeholder="Buscar artista o agrupación…" aria-label="Buscar artista o agrupación" aria-describedby="iconoBuscar">
+                    </div>
+                </div>
+                <div class="col-12 col-lg-5">
+                    <div class="filtros d-flex flex-wrap justify-content-center gap-2">
+                        <button type="button" class="filtro-btn active" data-filtrar-tipo="todos"><i class="bi bi-grid-3x3-gap-fill me-1"></i>Todos</button>
+                        <button type="button" class="filtro-btn" data-filtrar-tipo="solista"><i class="bi bi-person-fill me-1"></i>Solistas</button>
+                        <button type="button" class="filtro-btn" data-filtrar-tipo="agrupacion"><i class="bi bi-people-fill me-1"></i>Agrupaciones</button>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-center mb-4" aria-live="polite">
+                Mostrando <strong id="contadorArtistas">44</strong> de 44 artistas
+            </p>
+
+            <div id="grillaDirectorio" class="row g-4">
+                <!-- Tarjetas generadas por artistas.js -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PIE DE PÁGINA ================= -->
+    <footer class="footer py-5 text-white">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-12 col-lg-4">
+                    <a class="navbar-brand d-flex align-items-center mb-2" href="index.html">
+                        <span class="brand-marca d-inline-flex align-items-center justify-content-center me-2"><i class="bi bi-disc-fill rotar"></i></span>
+                        <span class="brand-logo">VallenatoStore</span>
+                    </a>
+                    <p class="small footer-texto">Tu tienda de confianza para vinilos, CDs y música vallenata. Más de 15 años haciendo latir el acordeón en cada hogar.</p>
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="#" class="red-social" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="red-social" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="red-social" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                        <a href="#" class="red-social" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2 offset-lg-1">
+                    <h6 class="footer-titulo">Enlaces</h6>
+                    <ul class="footer-lista">
+                        <li><a href="index.html"><i class="bi bi-chevron-right"></i> Inicio</a></li>
+                        <li><a href="historia.html"><i class="bi bi-chevron-right"></i> Historia</a></li>
+                        <li><a href="artistas.html"><i class="bi bi-chevron-right"></i> Artistas</a></li>
+                        <li><a href="catalogo.html"><i class="bi bi-chevron-right"></i> Catálogo</a></li>
+                        <li><a href="pedido.html"><i class="bi bi-chevron-right"></i> Hacer pedido</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="footer-titulo">Categorías</h6>
+                    <ul class="footer-lista">
+                        <li><a href="catalogo.html"><i class="bi bi-chevron-right"></i> CDs de vallenato</a></li>
+                        <li><a href="catalogo.html"><i class="bi bi-chevron-right"></i> Vinilos 180g</a></li>
+                        <li><a href="catalogo.html"><i class="bi bi-chevron-right"></i> Descargas</a></li>
+                        <li><a href="escuchar.html#top"><i class="bi bi-chevron-right"></i> Ranking Top 10</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-3">
+                    <h6 class="footer-titulo">Atención</h6>
+                    <ul class="footer-lista">
+                        <li><i class="bi bi-geo-alt me-1 text-dorado"></i> Magangué, Bolívar – Colombia</li>
+                        <li><i class="bi bi-telephone me-1 text-dorado"></i> +57 300 123 4567</li>
+                        <li><i class="bi bi-truck me-1 text-dorado"></i> Envíos a todo el país</li>
+                        <li><i class="bi bi-clock me-1 text-dorado"></i> Lun–Sáb · 8:00 – 18:00</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-secondary-subtle my-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <p class="mb-0 small"><span class="brand-logo me-1">VallenatoStore</span> © 2011–2026 · Todos los derechos reservados.</p>
+                <p class="mb-0 small footer-credito">Creado por <strong class="footer-credito">Alfonso Acuña Arrieta</strong> · Hecho con <i class="bi bi-heart-fill mx-1"></i> en la tierra del vallenato</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button id="btnVolver" class="btn-volver" aria-label="Volver arriba"><i class="bi bi-arrow-up"></i></button>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="main.js"></script>
+    <script src="reproductor.js"></script>
+    <script src="artistas.js"></script>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Realiza tu pedido en VallenatoStore: datos personales, dirección de envío, método de pago y resumen de tu compra con envío a todo Colombia.">
+    <meta name="author" content="Alfonso Acuña Arrieta">
+    <title>Hacer un Pedido | VallenatoStore</title>
+
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- AOS -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@300;400;500;700&family=Sora:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- Estilos personalizados -->
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+
+    <!-- ================= ENCABEZADO / NAVBAR ================= -->
+    <header class="header-vallenato fixed-top shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <span class="brand-marca d-inline-flex align-items-center justify-content-center me-2"><i class="bi bi-disc-fill rotar"></i></span>
+                    <span class="brand-logo">VallenatoStore</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuContenido"
+                    aria-controls="menuContenido" aria-expanded="false" aria-label="Abrir menú">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="menuContenido">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center gap-lg-1">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                        <li class="nav-item"><a class="nav-link" href="historia.html">Historia</a></li>
+                        <li class="nav-item"><a class="nav-link" href="artistas.html">Artistas</a></li>
+                        <li class="nav-item"><a class="nav-link" href="catalogo.html">Catálogo</a></li>
+                        <li class="nav-item"><a class="nav-link" href="escuchar.html">Escuchar</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="pedido.html">Pedido</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                        <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                            <a class="btn btn-dorado btn-sm px-3" href="pedido.html"><i class="bi bi-cart-plus me-1"></i>Pedir ahora</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ================= CHECKOUT ================= -->
+    <section id="pedido" class="seccion">
+        <div class="container">
+            <header class="seccion-cabecera" data-aos="fade-up">
+                <p class="seccion-eyebrow">Checkout seguro</p>
+                <h2 class="titulo-seccion">Completa tu pedido</h2>
+                <p class="seccion-sub mx-auto">En tres pasos tendrás tu álbum en camino. Envío gratis en compras superiores a $100.000.</p>
+            </header>
+
+            <div class="row g-4 mt-1 align-items-start">
+                <!-- ===== Columna izquierda: formulario en pasos ===== -->
+                <div class="col-12 col-lg-7" data-aos="fade-right">
+                    <div class="checkout-panel p-4">
+                        <form id="formPedido" data-exito="¡Gracias! Tu pedido fue recibido. Te escribiremos al correo registrado para confirmar el pago y el envío." novalidate>
+
+                            <!-- Paso 1: datos personales -->
+                            <div class="mb-4">
+                                <h3 class="paso-titulo"><span class="paso-num">1</span>Datos personales</h3>
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label class="form-label" for="campoNombre">Nombre completo *</label>
+                                        <input type="text" class="form-control" id="campoNombre" required minlength="3" placeholder="Ej. María Corrales">
+                                        <div class="invalid-feedback">Escribe tu nombre completo.</div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label" for="campoDocumento">Número de documento (C.C.) *</label>
+                                        <input type="text" class="form-control" id="campoDocumento" required pattern="[0-9]{4,12}" placeholder="Ej. 1001122334">
+                                        <div class="invalid-feedback">Ingresa entre 4 y 12 dígitos.</div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label" for="campoCorreo">Correo electrónico *</label>
+                                        <input type="email" class="form-control" id="campoCorreo" required placeholder="tucorreo@ejemplo.com">
+                                        <div class="invalid-feedback">Ingresa un correo válido.</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Paso 2: dirección de envío -->
+                            <div class="mb-4">
+                                <h3 class="paso-titulo"><span class="paso-num">2</span>Dirección de envío</h3>
+                                <div class="row g-3">
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label" for="campoDepartamento">Departamento *</label>
+                                        <select class="form-select" id="campoDepartamento" required>
+                                            <option value="" selected disabled>Selecciona…</option>
+                                            <option>Atlántico</option>
+                                            <option>Bolívar</option>
+                                            <option>Cesar</option>
+                                            <option>Córdoba</option>
+                                            <option>Guajira</option>
+                                            <option>Magdalena</option>
+                                            <option>Santander</option>
+                                            <option>Sucre</option>
+                                            <option>Otro departamento</option>
+                                        </select>
+                                        <div class="invalid-feedback">Elige tu departamento.</div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <label class="form-label" for="campoMunicipio">Municipio o ciudad *</label>
+                                        <input type="text" class="form-control" id="campoMunicipio" required minlength="3" placeholder="Ej. Magangué">
+                                        <div class="invalid-feedback">Escribe tu municipio.</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label" for="campoDireccion">Dirección *</label>
+                                        <input type="text" class="form-control" id="campoDireccion" required minlength="5" placeholder="Calle, carrera y número">
+                                        <div class="invalid-feedback">Escribe tu dirección completa.</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label" for="campoIndicaciones">Indicaciones de entrega (opcional)</label>
+                                        <textarea class="form-control" id="campoIndicaciones" rows="2" placeholder="Ej. entregar en la portería, celular de referencia…"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Paso 3: método de pago -->
+                            <div class="mb-2">
+                                <h3 class="paso-titulo"><span class="paso-num">3</span>Método de pago</h3>
+                                <fieldset>
+                                    <legend class="visually-hidden">Elige cómo quieres pagar</legend>
+                                    <div class="row g-3">
+                                        <div class="col-12 col-md-6">
+                                            <label class="pago-opcion">
+                                                <input type="radio" name="metodoPago" value="nequi" class="form-check-input m-0" required checked>
+                                                <span class="pago-ico"><i class="bi bi-phone-fill"></i></span>
+                                                <span>
+                                                    <span class="pago-label d-block">Nequi / Daviplata</span>
+                                                    <span class="pago-desc">Pago con tu celular o pasarela.</span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label class="pago-opcion">
+                                                <input type="radio" name="metodoPago" value="tarjeta" class="form-check-input m-0">
+                                                <span class="pago-ico"><i class="bi bi-credit-card-2-front"></i></span>
+                                                <span>
+                                                    <span class="pago-label d-block">Tarjeta débito/crédito</span>
+                                                    <span class="pago-desc">Visa, Mastercard, AMEX.</span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label class="pago-opcion">
+                                                <input type="radio" name="metodoPago" value="contraentrega" class="form-check-input m-0">
+                                                <span class="pago-ico"><i class="bi bi-cash-coin"></i></span>
+                                                <span>
+                                                    <span class="pago-label d-block">Pago contra entrega</span>
+                                                    <span class="pago-desc">Solo en la costa caribe.</span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                        <div class="col-12 col-md-6">
+                                            <label class="pago-opcion">
+                                                <input type="radio" name="metodoPago" value="consigna" class="form-check-input m-0">
+                                                <span class="pago-ico"><i class="bi bi-bank2"></i></span>
+                                                <span>
+                                                    <span class="pago-label d-block">Consignación bancaria</span>
+                                                    <span class="pago-desc">Bancolombia / Davivienda.</span>
+                                                </span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </fieldset>
+                                <div class="mt-3" id="pagoExtra"></div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- ===== Columna derecha: resumen de compra ===== -->
+                <div class="col-12 col-lg-5" data-aos="fade-left">
+                    <div class="checkout-panel resumen-panel">
+                        <div class="resumen-cabecera">
+                            <h4 class="h5">Tu pedido</h4>
+                            <span class="badge rounded-pill" id="resumenBadge">0</span>
+                        </div>
+
+                        <div class="resumen-items" id="resumenItems">
+                            <p class="resumen-vacio" id="resumenVacio"><i class="bi bi-cart me-1"></i>Tu pedido está vacío. Elige un producto del catálogo o agrégale uno abajo.</p>
+                        </div>
+
+                        <div class="p-3">
+                            <label class="form-label small fw-semibold" for="selProducto">Agregar otro producto</label>
+                            <div class="input-group">
+                                <select class="form-select" id="selProducto" aria-label="Elegir producto del catálogo">
+                                    <option value="" selected>Selecciona un álbum…</option>
+                                </select>
+                                <button type="button" class="btn btn-dorado" id="btnAgregar"><i class="bi bi-plus-lg"></i></button>
+                            </div>
+                        </div>
+
+                        <div class="resumen-totales">
+                            <div class="resumen-fila"><span>Subtotal</span><span id="totSubtotal">$0</span></div>
+                            <div class="resumen-fila"><span>Envío</span><span id="totEnvio">—</span></div>
+                            <div class="resumen-fila"><span>Impuestos (19%)</span><span id="totImpuestos">$0</span></div>
+                            <div class="resumen-fila total"><span>Total</span><span id="totTotal">$0</span></div>
+                        </div>
+
+                        <div class="resumen-acciones">
+                            <button type="submit" form="formPedido" class="btn btn-dorado btn-confirmar"><i class="bi bi-check2-circle me-1"></i>Confirmar Pedido</button>
+                        </div>
+
+                        <div class="badges-confianza">
+                            <span class="badge-confianza"><i class="bi bi-lock-fill"></i>Compra segura</span>
+                            <span class="badge-confianza"><i class="bi bi-arrow-repeat"></i>Garantía de satisfacción</span>
+                            <span class="badge-confianza"><i class="bi bi-shield-check"></i>Envío protegido</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= PIE DE PÁGINA ================= -->
+    <footer class="footer py-5 text-white">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-12 col-lg-4">
+                    <a class="navbar-brand d-flex align-items-center mb-2" href="index.html">
+                        <span class="brand-marca d-inline-flex align-items-center justify-content-center me-2"><i class="bi bi-disc-fill rotar"></i></span>
+                        <span class="brand-logo">VallenatoStore</span>
+                    </a>
+                    <p class="small footer-texto">Tu tienda de confianza para vinilos, CDs y música vallenata. Más de 15 años haciendo latir el acordeón en cada hogar.</p>
+                    <div class="d-flex gap-2 mt-3">
+                        <a href="#" class="red-social" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="red-social" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="red-social" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
+                        <a href="#" class="red-social" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-lg-2 offset-lg-1">
+                    <h6 class="footer-titulo">Enlaces</h6>
+                    <ul class="footer-lista">
+                        <li><a href="index.html"><i class="bi bi-chevron-right"></i> Inicio</a></li>
+                        <li><a href="historia.html"><i class="bi bi-chevron-right"></i> Historia</a></li>
+                        <li><a href="artistas.html"><i class="bi bi-chevron-right"></i> Artistas</a></li>
+                        <li><a href="catalogo.html"><i class="bi bi-chevron-right"></i> Catálogo</a></li>
+                        <li><a href="pedido.html"><i class="bi bi-chevron-right"></i> Hacer pedido</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-lg-2">
+                    <h6 class="footer-titulo">Categorías</h6>
+                    <ul class="footer-lista">
+                        <li><a href="catalogo.html"><i class="bi bi-chevron-right"></i> CDs de vallenato</a></li>
+                        <li><a href="catalogo.html"><i class="bi bi-chevron-right"></i> Vinilos 180g</a></li>
+                        <li><a href="catalogo.html"><i class="bi bi-chevron-right"></i> Descargas</a></li>
+                        <li><a href="escuchar.html#top"><i class="bi bi-chevron-right"></i> Ranking Top 10</a></li>
+                    </ul>
+                </div>
+                <div class="col-12 col-lg-3">
+                    <h6 class="footer-titulo">Atención</h6>
+                    <ul class="footer-lista">
+                        <li><i class="bi bi-geo-alt me-1 text-dorado"></i> Magangué, Bolívar – Colombia</li>
+                        <li><i class="bi bi-telephone me-1 text-dorado"></i> +57 300 123 4567</li>
+                        <li><i class="bi bi-truck me-1 text-dorado"></i> Envíos a todo el país</li>
+                        <li><i class="bi bi-clock me-1 text-dorado"></i> Lun–Sáb · 8:00 – 18:00</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="border-secondary-subtle my-4">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+                <p class="mb-0 small"><span class="brand-logo me-1">VallenatoStore</span> © 2011–2026 · Todos los derechos reservados.</p>
+                <p class="mb-0 small footer-credito">Creado por <strong class="footer-credito">Alfonso Acuña Arrieta</strong> · Hecho con <i class="bi bi-heart-fill mx-1"></i> en la tierra del vallenato</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón volver arriba -->
+    <button id="btnVolver" class="btn-volver" aria-label="Volver arriba"><i class="bi bi-arrow-up"></i></button>
+
+    <!-- Lógica del carrito y resumen -->
+    <script>
+        (function () {
+            'use strict';
+
+            var PRODUCTOS = {
+                '30 Mejores': { titulo: '30 Mejores', artista: 'Binomio de Oro', precio: 75000, img: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d4/15/84/d41584be-590b-bf6d-7a71-7c5fb1659ff4/0.jpg/300x300bb.jpg' },
+                '30 Grandes Éxitos': { titulo: '30 Grandes Éxitos', artista: 'Diomedes Díaz', precio: 65000, img: 'https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/a4/93/49/a493492d-540c-5afa-c4c4-41842cfc05b9/886446879833.jpg/300x300bb.jpg' },
+                'Experiencias Vividas': { titulo: 'Experiencias Vividas', artista: 'Diomedes Díaz & Colacho Mendoza', precio: 120000, img: 'https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/a4/93/49/a493492d-540c-5afa-c4c4-41842cfc05b9/886446879833.jpg/300x300bb.jpg' },
+                'Un Canto Celestial': { titulo: 'Un Canto Celestial', artista: 'Diomedes Díaz & Iván Zuleta', precio: 85000, img: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d4/15/84/d41584be-590b-bf6d-7a71-7c5fb1659ff4/0.jpg/300x300bb.jpg' },
+                'Título de Amor': { titulo: 'Título de Amor', artista: 'Diomedes Díaz & Juancho Rois', precio: 129000, img: 'https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/a4/93/49/a493492d-540c-5afa-c4c4-41842cfc05b9/886446879833.jpg/300x300bb.jpg' },
+                'Celedón Sin Fronteras': { titulo: 'Celedón Sin Fronteras', artista: 'Jorge Celedón', precio: 60000, img: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/d5/31/39/d53139f8-e17a-2d34-36c0-bcb0f1e93df1/196870783916_cover.jpg/300x300bb.jpg' },
+                'Llévame en Tus Sueños': { titulo: 'Llévame en Tus Sueños', artista: 'Jorge Celedón & Jimmy Zambrano', precio: 119000, img: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/d5/31/39/d53139f8-e17a-2d34-36c0-bcb0f1e93df1/196870783916_cover.jpg/300x300bb.jpg' },
+                'Los 30 Vallenatos de la Historia': { titulo: 'Los 30 Vallenatos de la Historia', artista: 'Varios artistas', precio: 99000, img: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/d5/31/39/d53139f8-e17a-2d34-36c0-bcb0f1e93df1/196870783916_cover.jpg/300x300bb.jpg' },
+                'La Hora de la Verdad': { titulo: 'La Hora de la Verdad', artista: 'Kaleth Morales & Andrés Herrera', precio: 72000, img: 'https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/2e/cb/6f/2ecb6f8e-550a-4c52-ab6a-b41986fbac04/mzi.copfhxiq.jpg/300x300bb.jpg' },
+                'Imparables': { titulo: 'Imparables', artista: 'Martín Elías', precio: 55000, img: 'https://is1-ssl.mzstatic.com/image/thumb/Music20/v4/76/77/0a/76770af8-aa97-54f8-b7f9-e722726e09c8/mzm.edlkydau.jpg/300x300bb.jpg' },
+                'A Mi Manera': { titulo: 'A Mi Manera', artista: 'Felipe Peláez & Zabaleta', precio: 125000, img: 'https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/a5/33/fc/a533fcef-4fe5-f108-41d6-075ed0ab5320/886444497398.jpg/300x300bb.jpg' },
+                '10 Años de Historia': { titulo: '10 Años de Historia', artista: 'Los Diablitos', precio: 69000, img: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/27/52/91/27529196-d103-a793-5601-0e588981dd99/829410988254.png/300x300bb.jpg' },
+                'Poncho Zuleta 45 Años': { titulo: 'Poncho Zuleta 45 Años', artista: 'Poncho Zuleta', precio: 98000, img: 'https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/f3/02/02/f30202c3-d21a-a57c-8f2e-bdd49480ff04/886445865219.jpg/300x300bb.jpg' },
+                'La 9ª Batalla (En Vivo)': { titulo: 'La 9ª Batalla (En Vivo)', artista: 'Silvestre Dangond & Rolando Ochoa', precio: 127000, img: 'https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/2c/69/a1/2c69a185-54f0-3cc6-d417-c39ecc8c8d51/196874754009.jpg/300x300bb.jpg' },
+                'Colección Top 50': { titulo: 'Colección Top 50', artista: 'Jorge Oñate', precio: 115000, img: 'https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/90/bb/d5/90bbd5fe-3622-1aa5-58d4-f178acaea5e5/888880013514.jpg/300x300bb.jpg' }
+            };
+
+            var carrito = {};
+
+            function moneda(n) {
+                return '$' + n.toLocaleString('es-CO');
+            }
+
+            var listaItems = document.getElementById('resumenItems');
+            var resumenVacio = document.getElementById('resumenVacio');
+            var totSubtotal = document.getElementById('totSubtotal');
+            var totEnvio = document.getElementById('totEnvio');
+            var totImpuestos = document.getElementById('totImpuestos');
+            var totTotal = document.getElementById('totTotal');
+            var badge = document.getElementById('resumenBadge');
+            var selProducto = document.getElementById('selProducto');
+            var btnAgregar = document.getElementById('btnAgregar');
+
+            function llenarSelect() {
+                Object.keys(PRODUCTOS).forEach(function (titulo) {
+                    var op = document.createElement('option');
+                    op.value = titulo;
+                    op.textContent = titulo + ' — ' + moneda(PRODUCTOS[titulo].precio);
+                    selProducto.appendChild(op);
+                });
+            }
+
+            function agregar(titulo) {
+                if (!PRODUCTOS[titulo]) { return; }
+                carrito[titulo] = (carrito[titulo] || 0) + 1;
+                pintarResumen();
+            }
+
+            function quitar(titulo) {
+                if (carrito[titulo] > 1) {
+                    carrito[titulo]--;
+                } else {
+                    delete carrito[titulo];
+                }
+                pintarResumen();
+            }
+
+            function pintarResumen() {
+                var titulos = Object.keys(carrito);
+                if (!titulos.length) {
+                    ausente(listaItems, '');
+                    if (resumenVacio) { resumenVacio.classList.remove('d-none'); }
+                    badge.textContent = '0';
+                    actTotal();
+                    return;
+                }
+
+                var filas = titulos.map(function (titulo) {
+                    var p = PRODUCTOS[titulo];
+                    var html = '';
+                    for (var c = 0; c < carrito[titulo]; c++) {
+                        html += [
+                            '<div class="resumen-item">',
+                            '<div class="resumen-thumb"><img src="' + p.img + '" alt="Portada de ' + p.titulo + '" loading="lazy"></div>',
+                            '<div class="resumen-item-info">',
+                            '<h6>' + p.titulo + '</h6>',
+                            '<p>' + p.artista + '</p>',
+                            '</div>',
+                            '<span class="resumen-item-precio">' + moneda(p.precio) + '</span>',
+                            '<button type="button" class="resumen-remove" aria-label="Quitar ' + p.titulo + '"><i class="bi bi-x"></i></button>',
+                            '</div>'
+                        ].join('');
+                    }
+                    return html;
+                }).join('');
+
+                listaItems.innerHTML = filas;
+                if (resumenVacio) { resumenVacio.classList.add('d-none'); }
+                badge.textContent = titulos.reduce(function (acc, t) { return acc + carrito[t]; }, 0);
+
+                var botonesQuitar = listaItems.querySelectorAll('.resumen-remove');
+                var indice = 0;
+                titulos.forEach(function (titulo) {
+                    for (var c2 = 0; c2 < carrito[titulo]; c2++) {
+                        (function (t) {
+                            botonesQuitar[indice].addEventListener('click', function () {
+                                quitar(t);
+                            });
+                        })(titulo);
+                        indice++;
+                    }
+                });
+
+                actTotal();
+            }
+
+            function ausente(el, text) {
+                listaItems.querySelectorAll('.resumen-item').forEach(function (n) { n.remove(); });
+            }
+
+            function actTotal() {
+                var subtotal = Object.keys(carrito).reduce(function (acc, t) {
+                    return acc + (carrito[t] * PRODUCTOS[t].precio);
+                }, 0);
+
+                var envio = subtotal === 0 ? 0 : (subtotal >= 100000 ? 0 : 8000);
+                var impuestos = Math.round(subtotal * 0.19);
+                var total = subtotal + envio + impuestos;
+
+                totSubtotal.textContent = moneda(subtotal);
+                totEnvio.textContent = subtotal === 0 ? '—' : (envio === 0 ? 'Gratis' : moneda(envio));
+                totImpuestos.textContent = moneda(impuestos);
+                totTotal.textContent = moneda(total);
+            }
+
+            btnAgregar.addEventListener('click', function () {
+                if (selProducto.value) {
+                    agregar(selProducto.value);
+                }
+            });
+
+            var visoresPago = {
+                nequi: 'Pagarás desde la app Nequi o Daviplata. Te enviaremos la seña y el número de celular por correo.',
+                tarjeta: 'Para tarjeta, diligencia esta opción y al confirmar te contactaremos para el link seguro de pago.',
+                contraentrega: 'Pagas en efectivo cuando recibas el pedido (solo costa caribe).',
+                consigna: 'Te enviaremos la cuenta Bancolombia/Davivienda y el valor de la consignación por correo.'
+            };
+
+            function cambiarPago() {
+                var sel = document.querySelector('input[name="metodoPago"]:checked');
+                var extra = document.getElementById('pagoExtra');
+                if (!sel || !extra) { return; }
+                extra.innerHTML = sel.value === 'tarjeta' ? '' : '<div class="alert alert-warning small">' + visoresPago[sel.value] + '</div>';
+            }
+
+            document.querySelectorAll('input[name="metodoPago"]').forEach(function (r) {
+                r.addEventListener('change', cambiarPago);
+            });
+
+            document.addEventListener('DOMContentLoaded', function () {
+                llenarSelect();
+                pintarResumen();
+
+                var params = new URLSearchParams(window.location.search);
+                var inc = params.get('producto');
+                if (inc) {
+                    var descodificado = (typeof decodeURIComponent === 'function') ? decodeURIComponent(inc) : inc;
+                    agregar(descodificado);
+                    window.history.replaceState && window.history.replaceState({}, '', window.location.pathname);
+                }
+            });
+        })();
+    </script>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

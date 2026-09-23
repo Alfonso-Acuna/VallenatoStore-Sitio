@@ -147,8 +147,8 @@ El navbar incluye los enlaces → controla la navegación con scroll suave.
 ## 9. Despliegue en GitHub Pages
 
 - El proyecto es estático, por lo que GitHub Pages sirve los archivos tal cual.
-- Repositorio remoto: **github.com/Alfonso-Acuna/VallenatoStore**.
-- **URL del sitio:** `https://alfonso-acuna.github.io/VallenatoStore/`
+- Repositorio remoto: **github.com/Alfonso-Acuna/VallenatoStore-Sitio**.
+- **URL del sitio:** `https://alfonso-acuna.github.io/VallenatoStore-Sitio/`
 - Rama desplegada: `main` (source: "Deploy from a branch").
 - Para actualizar el sitio: hacer `git add` / `git commit` / `git push origin main` (Pages se regenera automáticamente).
 - **Ojo con rutas relativas:** el HTML usa `styles.css`, `artistas.js`, `reproductor.js` con rutas relativas, así que funciona bajo cualquier sub-ruta del dominio.

@@ -697,6 +697,43 @@ img {
     to   { opacity: 1; transform: none; }
 }
 
+/* ---------- Carrito persistente (contador del navbar) ---------- */
+.carrito-contador {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.35rem;
+    height: 1.35rem;
+    margin-left: 0.45rem;
+    padding: 0 0.35rem;
+    border-radius: 999px;
+    background: var(--rojo-primario);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    line-height: 1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.28);
+}
+
+/* ---------- Feedback "agregado al carrito" ---------- */
+.btn-circulo.agregado {
+    background: linear-gradient(135deg, var(--verde), #1F5C39);
+    box-shadow: 0 6px 14px rgba(47, 126, 80, 0.42);
+}
+
+.btn-circulo.agregado:hover {
+    box-shadow: 0 10px 20px rgba(47, 126, 80, 0.5);
+}
+
+/* ---------- Buscador y rango de precio del catálogo ---------- */
+.buscador-select {
+    border-radius: 12px;
+}
+
+#contadorProductos {
+    color: var(--texto-suave);
+}
+
 .card-artista {
     color: var(--rojo-primario);
     font-weight: 500;

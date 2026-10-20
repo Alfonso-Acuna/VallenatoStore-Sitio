@@ -6,6 +6,18 @@
     <meta name="description" content="Contacto de VallenatoStore: escríbenos, suscríbete al boletín de novedades y consulta las preguntas frecuentes sobre pedidos y envíos.">
     <meta name="author" content="Alfonso Acuña Arrieta">
     <title>Contacto y Preguntas | VallenatoStore</title>
+    <!-- Open Graph / Twitter Cards -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="VallenatoStore">
+    <meta property="og:locale" content="es_CO">
+    <meta property="og:title" content="Contacto y Preguntas | VallenatoStore">
+    <meta property="og:description" content="Contacto de VallenatoStore: escríbenos, suscríbete al boletín de novedades y consulta las preguntas frecuentes sobre pedidos y envíos.">
+    <meta property="og:image" content="https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/a4/93/49/a493492d-540c-5afa-c4c4-41842cfc05b9/886446879833.jpg/600x600bb.jpg">
+    <meta property="og:url" content="https://alfonso-acuna.github.io/VallenatoStore-Sitio/contacto.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Contacto y Preguntas | VallenatoStore">
+    <meta name="twitter:description" content="Contacto de VallenatoStore: escríbenos, suscríbete al boletín de novedades y consulta las preguntas frecuentes sobre pedidos y envíos.">
+    <meta name="twitter:image" content="https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/a4/93/49/a493492d-540c-5afa-c4c4-41842cfc05b9/886446879833.jpg/600x600bb.jpg">
 
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -83,21 +95,21 @@
                 </div>
                 <div class="col-12 col-lg-7" data-aos="fade-left">
                     <div class="checkout-panel h-100 p-4">
-                        <form id="formContacto" data-exito="¡Mensaje enviado! Te responderemos lo antes posible." novalidate>
+                        <form id="formContacto" data-exito="¡Mensaje enviado! Te responderemos lo antes posible." data-emailjs novalidate>
                             <div class="row g-3">
                                 <div class="col-12 col-md-6">
                                     <label class="form-label" for="contactoNombre">Nombre completo *</label>
-                                    <input type="text" class="form-control" id="contactoNombre" required minlength="3">
+                                    <input type="text" class="form-control" id="contactoNombre" name="nombre" required minlength="3">
                                     <div class="invalid-feedback">Escribe tu nombre.</div>
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <label class="form-label" for="contactoCorreo">Correo electrónico *</label>
-                                    <input type="email" class="form-control" id="contactoCorreo" required>
+                                    <input type="email" class="form-control" id="contactoCorreo" name="correo" required>
                                     <div class="invalid-feedback">Ingresa un correo válido.</div>
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label" for="contactoAsunto">Asunto *</label>
-                                    <select class="form-select" id="contactoAsunto" required>
+                                    <select class="form-select" id="contactoAsunto" name="asunto" required>
                                         <option value="" selected disabled>Selecciona…</option>
                                         <option>Estado de mi pedido</option>
                                         <option>Pregunta sobre un producto</option>
@@ -109,7 +121,7 @@
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label" for="contactoMensaje">Mensaje *</label>
-                                    <textarea class="form-control" id="contactoMensaje" rows="5" required minlength="10" placeholder="Cuéntanos en qué te podemos ayudar…"></textarea>
+                                    <textarea class="form-control" id="contactoMensaje" name="mensaje" rows="5" required minlength="10" placeholder="Cuéntanos en qué te podemos ayudar…"></textarea>
                                     <div class="invalid-feedback">Escribe tu mensaje (mínimo 10 caracteres).</div>
                                 </div>
                                 <div class="col-12">
@@ -130,10 +142,10 @@
                 <div class="col-12 col-lg-7" data-aos="fade-up">
                     <h2 class="display-6 mb-2">Novedades de VallenatoStore</h2>
                     <p class="mb-4">Entérate primero de las ediciones limitadas, los vinilos restaurados y las promociones del mes. Sin spam, solo música.</p>
-                    <form id="formBoletin" class="row g-2 justify-content-center" data-exito="¡Listo! Ya estás en el boletín de novedades." novalidate>
+                    <form id="formBoletin" class="row g-2 justify-content-center" data-exito="¡Listo! Ya estás en el boletín de novedades." data-emailjs novalidate>
                         <div class="col-12 col-md-8">
                             <label class="visually-hidden" for="boletinCorreo">Tu correo electrónico</label>
-                            <input type="email" class="form-control form-control-lg" id="boletinCorreo" placeholder="tucorreo@ejemplo.com" required>
+                            <input type="email" class="form-control form-control-lg" id="boletinCorreo" name="correo" placeholder="tucorreo@ejemplo.com" required>
                             <div class="invalid-feedback">Ingresa un correo válido.</div>
                         </div>
                         <div class="col-12 col-md-4">
@@ -271,6 +283,9 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <!-- EmailJS (envío real de formularios por correo, configurado en main.js → EMAILJS_CONFIG) -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script src="main.js"></script>
+    <script src="carrito.js"></script>
 </body>
 </html>

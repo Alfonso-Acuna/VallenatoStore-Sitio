@@ -3,6 +3,16 @@
    (hero, contadores, navbar, menú móvil, AOS y validación)
    ========================================================= */
 
+/* Configuración de EmailJS (https://www.emailjs.com).
+   Dejar los tres valores vacíos para desactivar el envío por correo
+   (los formularios mostrarán solo el mensaje de éxito de data-exito).
+   Los formularios que envían por correo deben llevar el atributo data-emailjs. */
+var EMAILJS_CONFIG = {
+    publicKey: '',
+    serviceId: '',
+    templateId: ''
+};
+
 (function () {
     'use strict';
 
@@ -30,7 +40,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        var reduceMotion = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
         /* ---------- AOS: animaciones al hacer scroll ---------- */
         if (window.AOS) {
@@ -114,19 +124,63 @@
             });
         }
 
-        /* ---------- Validación genérica de formularios (data-exito) ---------- */
+        /* ---------- Validación genérica de formularios (data-exito / data-emailjs) ---------- */
+        function emailjsListo(form) {
+            return form.hasAttribute('data-emailjs')
+                && window.EMAILJS_CONFIG
+                && EMAILJS_CONFIG.publicKey
+                && EMAILJS_CONFIG.serviceId
+                && EMAILJS_CONFIG.templateId
+                && window.emailjs;
+        }
+
+        function parametrosFormulario(form) {
+            var params = {};
+            var campos = form.querySelectorAll('input, select, textarea');
+            for (var i = 0; i < campos.length; i++) {
+                var campo = campos[i];
+                var clave = campo.name || campo.id;
+                if (!clave || (campo.type === 'radio' && !campo.checked)) { continue; }
+                params[clave] = campo.value;
+            }
+            params.pagina = window.location.href;
+            return params;
+        }
+
+        function finalizarFormulario(form, mensaje) {
+            window.alert(mensaje);
+            form.reset();
+            form.classList.remove('was-validated');
+        }
+
         document.querySelectorAll('form[data-exito]').forEach(function (form) {
             form.addEventListener('submit', function (evento) {
+                evento.preventDefault();
+
                 if (!form.checkValidity()) {
-                    evento.preventDefault();
-                    evento.stopPropagation();
-                } else {
-                    evento.preventDefault();
-                    window.alert(form.getAttribute('data-exito'));
-                    form.reset();
-                    form.classList.remove('was-validated');
+                    form.classList.add('was-validated');
+                    return;
                 }
                 form.classList.add('was-validated');
+
+                if (!emailjsListo(form)) {
+                    var nota = form.hasAttribute('data-emailjs')
+                        ? '\n\n(Envío por correo inactivo: completa EMAILJS_CONFIG en main.js para activar EmailJS.)'
+                        : '';
+                    finalizarFormulario(form, form.getAttribute('data-exito') + nota);
+                    return;
+                }
+
+                var boton = form.querySelector('[type="submit"]');
+                if (boton) { boton.disabled = true; }
+
+                emailjs.send(EMAILJS_CONFIG.serviceId, EMAILJS_CONFIG.templateId, parametrosFormulario(form)).then(function () {
+                    if (boton) { boton.disabled = false; }
+                    finalizarFormulario(form, form.getAttribute('data-exito'));
+                }, function () {
+                    if (boton) { boton.disabled = false; }
+                    window.alert('No fue posible enviar el mensaje. Intenta de nuevo o escríbenos por WhatsApp.');
+                });
             });
         });
     });

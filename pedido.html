@@ -6,6 +6,18 @@
     <meta name="description" content="Realiza tu pedido en VallenatoStore: datos personales, dirección de envío, método de pago y resumen de tu compra con envío a todo Colombia.">
     <meta name="author" content="Alfonso Acuña Arrieta">
     <title>Hacer un Pedido | VallenatoStore</title>
+    <!-- Open Graph / Twitter Cards -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="VallenatoStore">
+    <meta property="og:locale" content="es_CO">
+    <meta property="og:title" content="Hacer un Pedido | VallenatoStore">
+    <meta property="og:description" content="Realiza tu pedido en VallenatoStore: datos personales, dirección de envío, método de pago y resumen de tu compra con envío a todo Colombia.">
+    <meta property="og:image" content="https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/a4/93/49/a493492d-540c-5afa-c4c4-41842cfc05b9/886446879833.jpg/600x600bb.jpg">
+    <meta property="og:url" content="https://alfonso-acuna.github.io/VallenatoStore-Sitio/pedido.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hacer un Pedido | VallenatoStore">
+    <meta name="twitter:description" content="Realiza tu pedido en VallenatoStore: datos personales, dirección de envío, método de pago y resumen de tu compra con envío a todo Colombia.">
+    <meta name="twitter:image" content="https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/a4/93/49/a493492d-540c-5afa-c4c4-41842cfc05b9/886446879833.jpg/600x600bb.jpg">
 
     <!-- Bootstrap 5.3 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -65,7 +77,7 @@
                 <!-- ===== Columna izquierda: formulario en pasos ===== -->
                 <div class="col-12 col-lg-7" data-aos="fade-right">
                     <div class="checkout-panel p-4">
-                        <form id="formPedido" data-exito="¡Gracias! Tu pedido fue recibido. Te escribiremos al correo registrado para confirmar el pago y el envío." novalidate>
+                        <form id="formPedido" novalidate>
 
                             <!-- Paso 1: datos personales -->
                             <div class="mb-4">
@@ -211,6 +223,7 @@
 
                         <div class="resumen-acciones">
                             <button type="submit" form="formPedido" class="btn btn-dorado btn-confirmar"><i class="bi bi-check2-circle me-1"></i>Confirmar Pedido</button>
+                            <p class="small text-muted mb-0 mt-2 text-center"><i class="bi bi-whatsapp me-1"></i>Al confirmar se abrirá WhatsApp con el desglose de tu pedido.</p>
                         </div>
 
                         <div class="badges-confianza">
@@ -313,10 +326,15 @@
                 'El Invencible': { titulo: 'El Invencible', artista: 'Jorge Oñate', precio: 25000, img: 'https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/9a/a1/ed/9aa1eda1-bef9-868a-433b-4a53f14a8b7b/mzi.quihxmnl.jpg/300x300bb.jpg' }
             };
 
-            var carrito = {};
+            var WHATSAPP = '573001234567';
 
             function moneda(n) {
                 return '$' + n.toLocaleString('es-CO');
+            }
+
+            function valorCampo(id) {
+                var el = document.getElementById(id);
+                return el ? el.value.trim() : '';
             }
 
             var listaItems = document.getElementById('resumenItems');
@@ -338,22 +356,27 @@
                 });
             }
 
+            function carritoActual() {
+                var mapa = {};
+                if (!window.Carrito) { return mapa; }
+                Carrito.items().forEach(function (item) { mapa[item.titulo] = item.cantidad; });
+                return mapa;
+            }
+
             function agregar(titulo) {
-                if (!PRODUCTOS[titulo]) { return; }
-                carrito[titulo] = (carrito[titulo] || 0) + 1;
+                if (!PRODUCTOS[titulo] || !window.Carrito) { return; }
+                Carrito.agregar(titulo, 1);
                 pintarResumen();
             }
 
             function quitar(titulo) {
-                if (carrito[titulo] > 1) {
-                    carrito[titulo]--;
-                } else {
-                    delete carrito[titulo];
-                }
+                if (!window.Carrito) { return; }
+                Carrito.quitar(titulo);
                 pintarResumen();
             }
 
             function pintarResumen() {
+                var carrito = carritoActual();
                 var titulos = Object.keys(carrito);
                 if (!titulos.length) {
                     ausente(listaItems, '');
@@ -406,19 +429,91 @@
                 listaItems.querySelectorAll('.resumen-item').forEach(function (n) { n.remove(); });
             }
 
-            function actTotal() {
+            function totales() {
+                var carrito = carritoActual();
                 var subtotal = Object.keys(carrito).reduce(function (acc, t) {
                     return acc + (carrito[t] * PRODUCTOS[t].precio);
                 }, 0);
 
                 var envio = subtotal === 0 ? 0 : (subtotal >= 100000 ? 0 : 8000);
                 var impuestos = Math.round(subtotal * 0.19);
-                var total = subtotal + envio + impuestos;
+                return {
+                    subtotal: subtotal,
+                    envio: envio,
+                    impuestos: impuestos,
+                    total: subtotal + envio + impuestos
+                };
+            }
 
-                totSubtotal.textContent = moneda(subtotal);
-                totEnvio.textContent = subtotal === 0 ? '—' : (envio === 0 ? 'Gratis' : moneda(envio));
-                totImpuestos.textContent = moneda(impuestos);
-                totTotal.textContent = moneda(total);
+            function actTotal() {
+                var t = totales();
+                totSubtotal.textContent = moneda(t.subtotal);
+                totEnvio.textContent = t.subtotal === 0 ? '—' : (t.envio === 0 ? 'Gratis' : moneda(t.envio));
+                totImpuestos.textContent = moneda(t.impuestos);
+                totTotal.textContent = moneda(t.total);
+            }
+
+            function etiquetaPago() {
+                var sel = document.querySelector('input[name="metodoPago"]:checked');
+                if (!sel) { return '—'; }
+                var caja = sel.closest ? sel.closest('.pago-opcion') : null;
+                var label = caja ? caja.querySelector('.pago-label') : null;
+                return label ? label.textContent.trim() : sel.value;
+            }
+
+            function mensajeWhatsApp() {
+                var carrito = carritoActual();
+                var t = totales();
+                var lineas = ['¡Hola VallenatoStore! Quiero confirmar mi pedido:', ''];
+
+                Object.keys(carrito).forEach(function (titulo) {
+                    var p = PRODUCTOS[titulo];
+                    lineas.push(carrito[titulo] + ' × ' + p.titulo + ' (' + p.artista + ') — ' + moneda(p.precio * carrito[titulo]));
+                });
+
+                lineas.push('');
+                lineas.push('Subtotal: ' + moneda(t.subtotal));
+                lineas.push('Envío: ' + (t.envio === 0 ? 'Gratis' : moneda(t.envio)));
+                lineas.push('Impuestos (19%): ' + moneda(t.impuestos));
+                lineas.push('TOTAL: ' + moneda(t.total));
+                lineas.push('');
+                lineas.push('Cliente: ' + valorCampo('campoNombre') + ' (C.C. ' + valorCampo('campoDocumento') + ')');
+                lineas.push('Correo: ' + valorCampo('campoCorreo'));
+                lineas.push('Envío a: ' + valorCampo('campoDireccion') + ', ' + valorCampo('campoMunicipio') + ', ' + valorCampo('campoDepartamento'));
+                if (valorCampo('campoIndicaciones')) {
+                    lineas.push('Indicaciones: ' + valorCampo('campoIndicaciones'));
+                }
+                lineas.push('Método de pago: ' + etiquetaPago());
+                return lineas.join('\n');
+            }
+
+            var formPedido = document.getElementById('formPedido');
+            if (formPedido) {
+                formPedido.addEventListener('submit', function (evento) {
+                    evento.preventDefault();
+
+                    if (!formPedido.checkValidity()) {
+                        formPedido.classList.add('was-validated');
+                        return;
+                    }
+                    formPedido.classList.add('was-validated');
+
+                    if (!window.Carrito || !Carrito.total()) {
+                        window.alert('Tu pedido está vacío: agrega al menos un álbum desde el catálogo o con el selector «Agregar otro producto».');
+                        return;
+                    }
+
+                    window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(mensajeWhatsApp()), '_blank', 'noopener');
+
+                    Carrito.vaciar();
+                    pintarResumen();
+                    formPedido.reset();
+                    formPedido.classList.remove('was-validated');
+                    var extra = document.getElementById('pagoExtra');
+                    if (extra) { extra.innerHTML = ''; }
+
+                    window.alert('¡Pedido confirmado! Se abrió WhatsApp con el desglose de tu compra: solo presiona «Enviar». Te confirmamos el pago y el envío por ese mismo chat.');
+                });
             }
 
             btnAgregar.addEventListener('click', function () {
@@ -464,5 +559,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="main.js"></script>
+    <script src="carrito.js"></script>
 </body>
 </html>

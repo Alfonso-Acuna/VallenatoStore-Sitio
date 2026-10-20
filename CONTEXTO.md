@@ -100,7 +100,7 @@ Navegación común: **Inicio · Historia · Artistas · Catálogo · Escuchar ·
 - **Directorio** (id `directorio`): buscador (`#buscarArtista`), filtros `[data-filtrar-tipo]`, contador (`#contadorArtistas`) y grilla `#grillaDirectorio` generada por `artistas.js`.
 
 **`catalogo.html`**
-- **Catálogo** (id `catalogo`): **24 productos** (títulos idénticos a las claves de `PRUEBAS_PRODUCTOS`). Filtros por formato (`[data-filtrar-formato]`: todos/vinilo/cd/digital) manejados por el script inline. Cada tarjeta: portada **1:1**, badge `.producto-format` (`cd`/`vinilo`/`digital`), `.card-title`, `.card-text`, `.precio` y botón **"Escuchar muestra"** inyectado por el reproductor. El botón circular de carrito (`btn-circulo`) enlaza a `pedido.html?producto=<título codificado>`.
+- **Catálogo** (id `catalogo`): **24 productos** (títulos idénticos a las claves de `PRUEBAS_PRODUCTOS`). Filtros por formato (`[data-filtrar-formato]`: todos/vinilo/cd/digital) manejados por el script inline. Cada tarjeta: portada **1:1**, badge `.producto-format` (`cd`/`vinilo`/`digital`), `.card-title`, `.card-text`, `.precio` y botón **"Escuchar muestra"** inyectado por el reproductor. El botón circular de carrito (`btn-circulo`) enlaza a `pedido.html?producto=<título codificado>`. Los precios `.precio` siguen el **esquema de la sección 6**.
 - **Formatos** (id `formatos`): 3 tarjetas (Vinilo 180g, CD, Descarga digital) con listas de beneficios.
 
 **`escuchar.html`**
@@ -122,7 +122,38 @@ Navegación común: **Inicio · Historia · Artistas · Catálogo · Escuchar ·
 
 ---
 
-## 6. Datos de artistas (`artistas.js`)
+## 6. Esquema de precios por formato y categoría
+
+Vigente desde el **19/10/2026**. Es la **fuente de verdad** de precios: los 24 precios visibles en `catalogo.html` (`.precio`) y los 24 del mapa `PRODUCTOS` de `pedido.html` (campo `precio`, sin puntos ni símbolo) **deben coincidir siempre** con esta tabla.
+
+| Formato (`data-formato`) | Categoría | Precio |
+| --- | --- | --- |
+| Vinilo 180g (`vinilo`) | Álbum legendario / clásico (Diomedes Díaz, Rafael Orozco, Jorge Oñate, Binomio de Oro, Los Hermanos Zuleta) | **$180.000** |
+| Vinilo 180g (`vinilo`) | Álbum contemporáneo / reciente (Silvestre Dangond, Peter Manjarrés, Jorge Celedón, Felipe Peláez & Zabaleta) | **$150.000** |
+| Vinilo 180g (`vinilo`) | Edición especial o coleccionable de edición limitada | **$210.000** |
+| CD (`cd`) | Álbum estándar / lanzamiento en joyero o digipak | **$45.000** |
+| CD (`cd`) | Edición doble o grabación especial en vivo | **$60.000** |
+| CD (`cd`) | Catálogo clásico / reexpedición (recopilatorios y legados) | **$38.000** |
+| Digital (`digital`) | Álbum completo (MP3 320 kbps / FLAC) | **$25.000** |
+| Digital (`digital`) | EP o lanzamiento sencillo | **$18.000** |
+
+**Asignación actual de los 24 productos:**
+
+- **Vinilos (8):**
+  - $180.000 (clásicos): *Experiencias Vividas*, *Título de Amor* (Diomedes Díaz), *Aniversario* (Los Hermanos Zuleta).
+  - $150.000 (contemporáneos): *Llévame en Tus Sueños* (Jorge Celedón), *A Mi Manera* (Felipe Peláez & Zabaleta), *La 9ª Batalla (En Vivo)* (Silvestre Dangond), *El Caballero del Vallenato* (Peter Manjarrés).
+  - $210.000 (edición especial/coleccionable): *Colección Top 50* (Jorge Oñate).
+- **CDs (12):**
+  - $60.000 (doble): *Los 30 Vallenatos de la Historia* (doble CD, varios artistas).
+  - $45.000 (estándar): *Un Canto Celestial*, *La Hora de la Verdad*, *10 Años de Historia*, *Poncho Zuleta 45 Años*, *Pa Que Te Enamores*, *Mi Diosa Humana*.
+  - $38.000 (catálogo clásico/reexpedición): *30 Mejores* (Binomio de Oro), *30 Grandes Éxitos* (Diomedes Díaz), *Siempre Gigantes*, *Grandes Éxitos de Los Chiches Vallenatos*, *Adiós a la Diosa*.
+- **Digitales (4):** $25.000 (álbum completo): *Celedón Sin Fronteras*, *Imparables*, *Volver a Triunfar*, *El Invencible*. **No hay EPs ni sencillos** en el catálogo, así que la tarifa de $18.000 queda disponible pero sin uso.
+
+> Con este esquema conviven precios por debajo y por encima del umbral de **envío gratis ($100.000)** del resumen de compra, así que el cálculo de envío/impuestos del carrito sigue siendo visible en la mayoría de los pedidos.
+
+---
+
+## 7. Datos de artistas (`artistas.js`)
 
 - Objeto `ARTISTAS_FOTOS`: dict `id → URL` de imagen (fuente: Apple Music / iTunes cover art).
 - Array `ARTISTAS` con **44 entradas**, cada una:
@@ -144,7 +175,7 @@ Navegación común: **Inicio · Historia · Artistas · Catálogo · Escuchar ·
 
 ---
 
-## 7. Reproductor integrado (`reproductor.js`)
+## 8. Reproductor integrado (`reproductor.js`)
 
 - Tres mapas de pistas + enlace genérico:
   - `PRUEBAS_ESCUCHAR`: canciones del `#escuchar` (27) y del Top 10. Clave = nombre de la canción.
@@ -162,16 +193,16 @@ Navegación común: **Inicio · Historia · Artistas · Catálogo · Escuchar ·
 
 ---
 
-## 8. Formularios y carrito
+## 9. Formularios y carrito
 
 - Todos los formularios llevan el atributo **`data-exito`** (mensaje de éxito) y `novalidate`. La validación es **genérica en `main.js`**: al enviar usa `form.checkValidity()`, activa `was-validated` de Bootstrap, y si es válido muestra `window.alert(...)` y `form.reset()`.
   Formularios: `#formPedido` (pedido.html), `#formContacto` y `#formBoletin` (contacto.html).
-- **Carrito (pedido.html):** script inline ES5 con objeto `PRODUCTOS`, estado en un mapa `carrito {titulo: cantidad}`, render del resumen con miniaturas cuadradas, cálculo de subtotal/envío/impuestos/total (es-CO), selector para agregar y soporte de `?producto=<título>`.
+- **Carrito (pedido.html):** script inline ES5 con objeto `PRODUCTOS` (sus 24 `precio` coinciden con `.precio` del catálogo y con el esquema de la sección 6), estado en un mapa `carrito {titulo: cantidad}`, render del resumen con miniaturas cuadradas, cálculo de subtotal/envío/impuestos/total (es-CO), selector para agregar y soporte de `?producto=<título>`.
 - **Sin backend:** ningún formulario envía datos a un servidor real. Solo simulación en el cliente.
 
 ---
 
-## 9. Despliegue en GitHub Pages
+## 10. Despliegue en GitHub Pages
 
 - El proyecto es estático, por lo que GitHub Pages sirve los archivos tal cual.
 - Repositorio remoto: **github.com/Alfonso-Acuna/VallenatoStore-Sitio**.
@@ -183,12 +214,12 @@ Navegación común: **Inicio · Historia · Artistas · Catálogo · Escuchar ·
 
 ---
 
-## 10. Notas y convenciones para seguir modificando
+## 11. Notas y convenciones para seguir modificando
 
 1. **Siempre mantener este `CONTEXTO.md` actualizado** tras cualquier cambio estructural o de datos.
 2. El navbar/footer se **duplican estáticamente** en las 7 páginas. Al cambiar un enlace del menú o un dato del footer (dirección, teléfono, redes, horario), repetirlo en **todas** las páginas y marcar el enlace activo de esa página con `aria-current="page"`.
 3. JS en **ES5** (sin `const`/`let`/arrow). Nombres de clases con prefijo de componente (`artista-`, `ficha-`, `rep-`, `producto-`, `escucha-`, `top-`, `resumen-`, `paso-`).
 4. Si se agrega un artista/discografía: actualizar `ARTISTAS`, `ARTISTAS_FOTOS`, y si está en destacados/catálogo/escuchar/Top 10, también su pista en `reproductor.js`.
-5. Si se agrega un producto: replicar su título exacto en el catálogo (`catalogo.html`), en `PRUEBAS_PRODUCTOS` (reproductor.js) y en el mapa `PRODUCTOS` + `<select>` de `pedido.html`.
+5. Si se agrega un producto: replicar su título exacto en el catálogo (`catalogo.html`), en `PRUEBAS_PRODUCTOS` (reproductor.js) y en el mapa `PRODUCTOS` + `<select>` de `pedido.html`, **asignándole su precio según el esquema de la sección 6** (formato + categoría) en `.precio` y en `precio:`.
 6. Respetar la paleta, el glassmorphism (`--vidrio`) y las miniaturas 1:1 definidas en `styles.css`.
 7. Accesibilidad y calidad: etiquetas `alt` descriptivas, `aria-label` en botones de icono, contraste AA y JS sin errores en consola.

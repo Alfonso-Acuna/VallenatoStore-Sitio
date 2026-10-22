@@ -224,6 +224,7 @@
                         <div class="resumen-acciones">
                             <button type="submit" form="formPedido" class="btn btn-dorado btn-confirmar"><i class="bi bi-check2-circle me-1"></i>Confirmar Pedido</button>
                             <p class="small text-muted mb-0 mt-2 text-center"><i class="bi bi-whatsapp me-1"></i>Al confirmar se abrirá WhatsApp con el desglose de tu pedido.</p>
+                            <p class="small mb-0 mt-1 text-center" id="checkoutEstado" role="status"></p>
                         </div>
 
                         <div class="badges-confianza">
@@ -377,7 +378,7 @@
 
             function pintarResumen() {
                 var carrito = carritoActual();
-                var titulos = Object.keys(carrito);
+                var titulos = Object.keys(carrito).filter(function (t) { return !!PRODUCTOS[t]; });
                 if (!titulos.length) {
                     ausente(listaItems, '');
                     if (resumenVacio) { resumenVacio.classList.remove('d-none'); }
@@ -432,7 +433,7 @@
             function totales() {
                 var carrito = carritoActual();
                 var subtotal = Object.keys(carrito).reduce(function (acc, t) {
-                    return acc + (carrito[t] * PRODUCTOS[t].precio);
+                    return PRODUCTOS[t] ? acc + (carrito[t] * PRODUCTOS[t].precio) : acc;
                 }, 0);
 
                 var envio = subtotal === 0 ? 0 : (subtotal >= 100000 ? 0 : 8000);
@@ -468,6 +469,7 @@
 
                 Object.keys(carrito).forEach(function (titulo) {
                     var p = PRODUCTOS[titulo];
+                    if (!p) { return; }
                     lineas.push(carrito[titulo] + ' × ' + p.titulo + ' (' + p.artista + ') — ' + moneda(p.precio * carrito[titulo]));
                 });
 
@@ -488,9 +490,11 @@
             }
 
             var formPedido = document.getElementById('formPedido');
+            var procesandoPedido = false;
             if (formPedido) {
                 formPedido.addEventListener('submit', function (evento) {
                     evento.preventDefault();
+                    if (procesandoPedido) { return; }
 
                     if (!formPedido.checkValidity()) {
                         formPedido.classList.add('was-validated');
@@ -503,18 +507,81 @@
                         return;
                     }
 
-                    window.open('https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(mensajeWhatsApp()), '_blank', 'noopener');
+                    var carrito = carritoActual();
+                    var t = totales();
+                    var items = Object.keys(carrito).filter(function (titulo) {
+                        return !!PRODUCTOS[titulo];
+                    }).map(function (titulo) {
+                        return {
+                            product_id: titulo,
+                            quantity: carrito[titulo],
+                            unit_price: PRODUCTOS[titulo].precio
+                        };
+                    });
+                    var mensaje = mensajeWhatsApp();
+                    var urlWhatsApp = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(mensaje);
+                    var estado = document.getElementById('checkoutEstado');
+                    var botonConfirmar = document.querySelector('.btn-confirmar');
 
-                    Carrito.vaciar();
-                    pintarResumen();
-                    formPedido.reset();
-                    formPedido.classList.remove('was-validated');
-                    var extra = document.getElementById('pagoExtra');
-                    if (extra) { extra.innerHTML = ''; }
+                    function avisar(texto, tipo) {
+                        if (!estado) { return; }
+                        estado.className = 'small mb-0 mt-1 text-center' + (tipo ? ' text-' + tipo : '');
+                        estado.textContent = texto;
+                    }
 
-                    window.alert('¡Pedido confirmado! Se abrió WhatsApp con el desglose de tu compra: solo presiona «Enviar». Te confirmamos el pago y el envío por ese mismo chat.');
+                    function abrirWhatsApp(ventana) {
+                        if (ventana && !ventana.closed) {
+                            ventana.opener = null;
+                            ventana.location.href = urlWhatsApp;
+                        } else {
+                            window.open(urlWhatsApp, '_blank', 'noopener');
+                        }
+                    }
+
+                    function limpiarFormulario() {
+                        formPedido.reset();
+                        formPedido.classList.remove('was-validated');
+                        var extra = document.getElementById('pagoExtra');
+                        if (extra) { extra.innerHTML = ''; }
+                        pintarResumen();
+                    }
+
+                    var usaSupabase = window.Pedidos && window.Pedidos.disponible()
+                        && window.Auth && window.Auth.estaAutenticado();
+
+                    if (!usaSupabase) {
+                        abrirWhatsApp(null);
+                        Carrito.vaciar();
+                        limpiarFormulario();
+                        avisar('Pedido enviado por WhatsApp.', 'success');
+                        window.alert('¡Pedido confirmado! Se abrió WhatsApp con el desglose de tu compra: solo presiona «Enviar». Te confirmamos el pago y el envío por ese mismo chat.');
+                        return;
+                    }
+
+                    var ventana = window.open('', '_blank');
+                    procesandoPedido = true;
+                    if (botonConfirmar) { botonConfirmar.disabled = true; }
+                    avisar('Registrando tu pedido en tu cuenta…', 'muted');
+
+                    Pedidos.crear(items, { total: t.total }).then(function (orden) {
+                        abrirWhatsApp(ventana);
+                        limpiarFormulario();
+                        avisar('Pedido guardado. Revisa «Mis pedidos» en tu cuenta.', 'success');
+                        window.alert('¡Pedido confirmado y guardado! Número #' + String(orden.id).slice(0, 8).toUpperCase() + '.\n\nSe abrió WhatsApp con el desglose: solo presiona «Enviar». También puedes consultarlo en «Mis pedidos».');
+                    }, function (error) {
+                        if (ventana && !ventana.closed) { ventana.close(); }
+                        avisar('No se pudo guardar el pedido: ' + (error.message || 'error desconocido'), 'danger');
+                        window.alert('No fue posible registrar el pedido en tu cuenta. Tu carrito sigue intacto.\n\n' + (error.message || 'Intenta de nuevo.'));
+                    }).then(function () {
+                        procesandoPedido = false;
+                        if (botonConfirmar) { botonConfirmar.disabled = false; }
+                    });
                 });
             }
+
+            document.addEventListener('carrito:actualizado', function () {
+                pintarResumen();
+            });
 
             btnAgregar.addEventListener('click', function () {
                 if (selProducto.value) {
@@ -559,6 +626,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
     <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="config.js"></script>
+    <script src="supabaseClient.js"></script>
     <script src="carrito.js"></script>
+    <script src="auth.js"></script>
+    <script src="orders.js"></script>
 </body>
 </html>

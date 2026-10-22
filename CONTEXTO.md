@@ -6,10 +6,10 @@
 
 ## 1. Resumen
 
-VallenatoStore es una **tienda virtual estática** de música vallenata organizada como **sitio multi-página**: vende **álbumes, vinilos (CD / Vinilo 180g / descarga digital)**, muestra un **directorio de 44 artistas y agrupaciones** con discografías y enlaces a plataformas, incluye un **reproductor integrado de muestras de 30 s**, un **Ranking Top 10**, un **checkout de 2 columnas** con **carrito persistente (`localStorage`) y contador en la navbar**, un **buscador + filtro de precio** en el catálogo, **formularios validados** y envío por **WhatsApp (pedidos)** / **EmailJS (contacto y boletín)**, más **Open Graph y JSON-LD** para compartir y SEO.
+VallenatoStore es una **tienda virtual estática** de música vallenata organizada como **sitio multi-página**: vende **álbumes, vinilos (CD / Vinilo 180g / descarga digital)**, muestra un **directorio de 44 artistas y agrupaciones** con discografías y enlaces a plataformas, incluye un **reproductor integrado de muestras de 30 s**, un **Ranking Top 10**, un **checkout de 2 columnas** con **carrito persistente (`localStorage` para invitados + Supabase para usuarios autenticados) y contador en la navbar**, un **buscador + filtro de precio** en el catálogo, **formularios validados** y envío por **WhatsApp (pedidos)** / **EmailJS (contacto y boletín)**, más **Open Graph y JSON-LD** para compartir y SEO. Desde la integración de Supabase también ofrece **registro/inicio de sesión, perfil, carrito sincronizado e historial de pedidos**.
 
 - **Idioma:** Español (Colombia).
-- **Tipo:** Sitio 100 % estático (HTML + CSS + JS vanilla). Sin framework de frontend ni backend.
+- **Tipo:** Sitio 100 % estático (HTML + CSS + JS vanilla) con **Supabase como BaaS** para autenticación y persistencia. Sin framework de frontend ni servidor propio.
 - **Propósito:** exhibir catálogo, permitir escuchar muestras sin salir de la página y capturar pedidos confirmándolos por WhatsApp.
 - **Público:** coleccionistas y fanáticos del vallenato (Colombia e internacional).
 - **Datos oficiales:** autor **Alfonso Acuña Arrieta**, sede **Magangué, Bolívar – Colombia**, teléfono ficticio **+57 300 123 4567**, en funcionamiento «desde 2011».
@@ -29,9 +29,16 @@ VallenatoStore/
 ├── contacto.html     → Contacto + boletín + FAQ
 ├── styles.css        → Hoja de estilos personalizada (paleta, componentes, responsive)
 ├── main.js           → Comportamiento compartido por todas las páginas
-├── carrito.js        → Carrito persistente (localStorage) + contador del navbar
+├── config.js         → SUPABASE_URL y SUPABASE_ANON_KEY (configuración pública)
+├── supabaseClient.js → Cliente reutilizable de Supabase
+├── auth.js           → Registro, login, logout, perfil y barra de cuenta
+├── carrito.js        → Carrito invitado (localStorage) + sincronización Supabase
+├── orders.js         → Registro de órdenes e historial de pedidos
 ├── artistas.js       → Datos de los 44 artistas + renderizado/filtros del directorio
 ├── reproductor.js    → Reproductor de muestras de 30 s
+├── supabase/
+│   └── schema.sql    → Tablas, RLS, triggers, políticas y catálogo inicial
+├── .env.example      → Variables de referencia para Supabase
 └── CONTEXTO.md       → Este documento
 ```
 
@@ -40,7 +47,12 @@ VallenatoStore/
 | `index.html`, `historia.html`, `artistas.html`, `catalogo.html`, `escuchar.html`, `pedido.html`, `contacto.html` | Una página completa cada uno. Comparten navbar/footer **duplicados estáticamente** (cada página marca el enlace activo con `aria-current="page"`). Todos incluyen el bloque de **Open Graph/Twitter Cards** en el `<head>`. |
 | `styles.css` | Todo el diseño visual, paleta, animaciones, glassmorphism y responsive (incluye `.carrito-contador`, `.buscador-select`, `#contadorProductos`). |
 | `main.js` | AOS, hero escalonado, contadores, navbar compacta, volver-arriba, cierre del menú móvil, validación genérica de formularios y envío por **EmailJS** (`EMAILJS_CONFIG` al inicio del archivo). |
-| `carrito.js` | Objeto global **`window.Carrito`** (`agregar/quitar/vaciar/items/total/cantidadDe/pintar`) con respaldo en memoria si falla `localStorage`, más la inyección del contador en la navbar. |
+| `config.js` | Expone `window.VALLENATO_CONFIG` con la URL y la anon key de Supabase. |
+| `supabaseClient.js` | Crea `window.VallenatoSupabase` (cliente, `configurado`, `error`). Si faltan credenciales, la tienda sigue funcionando sin login. |
+| `auth.js` | Objeto global **`window.Auth`**. Inyecta el botón/menú de cuenta en la navbar, construye el modal de login/registro y escucha `onAuthStateChange`. |
+| `carrito.js` | Objeto global **`window.Carrito`** (`agregar/quitar/eliminar/establecer/vaciar/items/total/cantidadDe/pintar/alIniciarSesion/alCerrarSesion/vaciarRemoto/recargar`). Usa `localStorage` para invitados y `cart_items` para usuarios autenticados. Emite `carrito:actualizado`. |
+| `orders.js` | Objeto global **`window.Pedidos`** (`crear/historial/abrirHistorial/disponible`). Inserta `orders` + `order_items`, vacía el carrito y pinta el modal «Mis pedidos». |
+| `supabase/schema.sql` | Script único para el SQL Editor: tablas, RLS, trigger de perfiles, políticas, permisos y seed de 24 productos. |
 | `artistas.js` | Array `ARTISTAS` + construcción de tarjetas y filtros del directorio. |
 | `reproductor.js` | Mapas de pistas → URLs de audio y creación del reproductor flotante. |
 
@@ -57,8 +69,9 @@ VallenatoStore/
 | AOS (Animate On Scroll) | 2.3.4 | Animaciones de entrada al hacer scroll. |
 | Google Fonts | — | **Lobster** (logo), **Roboto** (texto base), **Sora** (títulos). |
 | EmailJS (`@emailjs/browser`) | 4.x | **Solo en `contacto.html`**: envío real de `#formContacto` y `#formBoletin`. Se desactiva dejando vacío `EMAILJS_CONFIG`. |
+| Supabase JS (`@supabase/supabase-js`) | 2.x (CDN) | Auth, carrito remoto y órdenes. Sin credenciales en `config.js`, la tienda se comporta como antes (carrito local + WhatsApp). |
 
-**Lenguaje:** JavaScript ES5 (var, funciones anidadas, IIFEs). Sin módulos ni bundlers. Orden de carga recomendado: `bootstrap.bundle.min.js` → `aos.js` → `main.js` → **`carrito.js`** → (`reproductor.js`) → (`artistas.js` según página) → script inline de la página. En `contacto.html` el SDK de EmailJS va antes de `main.js`.
+**Lenguaje:** JavaScript ES5 (var, funciones anidadas, IIFEs). Sin módulos ni bundlers. Orden de carga recomendado: `bootstrap.bundle.min.js` → `aos.js` → `main.js` → **SDK Supabase** → `config.js` → `supabaseClient.js` → **`carrito.js`** → `auth.js` → `orders.js` → (`reproductor.js`) → (`artistas.js` según página) → script inline de la página. En `contacto.html` el SDK de EmailJS va antes de `main.js`.
 
 ---
 
@@ -203,10 +216,13 @@ Vigente desde el **19/10/2026**. Es la **fuente de verdad** de precios: los 24 p
 
 - **Validación genérica (`main.js`):** todo formulario con **`data-exito`** y `novalidate` usa `form.checkValidity()`, activa `was-validated` de Bootstrap y, si es válido, avisa con `window.alert(data-exito)`, hace `form.reset()` y retira la clase. Formularios: `#formContacto` y `#formBoletin` (ambos con `data-emailjs`).
 - **EmailJS (opcional):** si el formulario tiene `data-emailjs` y `EMAILJS_CONFIG` (inicio de `main.js`) tiene `publicKey`, `serviceId` y `templateId` **no vacíos** con el SDK cargado, el envío se hace con `emailjs.send(...)` y los campos se envían por su atributo `name` (`nombre`, `correo`, `asunto`, `mensaje`). Mientras esté vacío, se muestra el mensaje de `data-exito` más una nota de que el envío está inactivo. En caso de error: alert de reintento y botón reactivado.
-- **`carrito.js` (todas las páginas):** clave `localStorage` **`vallenatostore_carrito`** con forma `{ "título del álbum": cantidad }`; si `localStorage` falla, se usa una copia en memoria. En `DOMContentLoaded` inyecta el badge `<span class="carrito-contador" data-contador-carrito>` dentro de `a[href="pedido.html"].btn-dorado` de la navbar y lo pinta (oculto con 0). Al cargar cualquier página nueva el badge refleja lo guardado.
-- **Carrito (pedido.html):** el script inline replica el mapa `carrito` del `Carrito` global mediante `carritoActual()`, renderiza el resumen con miniaturas cuadradas y calcula subtotal / envío (gratis ≥ $100.000, si no $8.000) / impuestos 19 % / total en `es-CO`.
+- **Autenticación (`auth.js`):** el modal se inyecta al cargar; pestañas «Ingresar» y «Crear cuenta». El registro envía `full_name` en `options.data` (el trigger de Supabase lo copia a `profiles`). La navbar recibe dinámicamente el botón **Ingresar** o el menú de cuenta (nombre, «Mis pedidos», «Cerrar sesión»). Toda la UI reacciona a `onAuthStateChange`.
+- **`carrito.js` (todas las páginas):** clave `localStorage` **`vallenatostore_carrito`** con forma `{ "título del álbum": cantidad }` para invitados; si `localStorage` falla, se usa una copia en memoria. Con sesión activa, las operaciones se sincronizan contra `public.cart_items` (upsert por `user_id + product_id`). Al iniciar sesión se **fusionan** el carrito local y el remoto, y se limpia el local. En `DOMContentLoaded` inyecta el badge `<span class="carrito-contador" data-contador-carrito>` dentro de `a[href="pedido.html"].btn-dorado` de la navbar. Emite `carrito:actualizado` para que `pedido.html` repinte el resumen.
+- **Carrito (pedido.html):** el script inline lee el estado de `Carrito`, renderiza el resumen con miniaturas cuadradas y calcula subtotal / envío (gratis ≥ $100.000, si no $8.000) / impuestos 19 % / total en `es-CO`; escucha `carrito:actualizado` para refrescarse tras el login o la sincronización.
+- **Checkout con sesión (`orders.js`):** si hay usuario autenticado y Supabase está configurado, «Confirmar Pedido» inserta la orden en `orders`, sus líneas en `order_items`, vacía `cart_items` y luego abre WhatsApp con el desglose. Si no hay sesión (o Supabase no está configurado), se conserva el flujo de invitado: WhatsApp + vaciado del carrito local.
+- **Historial:** el menú de cuenta → «Mis pedidos» abre un modal con las órdenes del usuario (fecha, estado, ítems y total), leídas con RLS por `auth.uid() = user_id`.
 - **Teléfono y canales:** WhatsApp **`573001234567`** (`WHATSAPP` en el script de pedido.html, igual al del footer) · correo `pedidos@vallenatostore.co`.
-- **Sin backend real:** el catálogo/pedidos se confirman por WhatsApp y el contacto por EmailJS; nada se guarda en un servidor propio.
+- **Backend:** Supabase guarda perfiles, carrito y órdenes; el catálogo sigue siendo estático y los pedidos se confirman por WhatsApp. El contacto sigue usando EmailJS.
 
 ---
 
@@ -230,7 +246,8 @@ Vigente desde el **19/10/2026**. Es la **fuente de verdad** de precios: los 24 p
 - **URL del sitio:** `https://alfonso-acuna.github.io/VallenatoStore-Sitio/`
 - Rama desplegada: `main` (source: "Deploy from a branch").
 - Para actualizar el sitio: `git add` / `git commit` / `git push origin main` (Pages se regenera automáticamente).
-- **Rutas relativas:** el HTML usa `styles.css`, `main.js`, `carrito.js`, `artistas.js`, `reproductor.js` con rutas relativas y los enlaces entre páginas también son relativos, así que funciona bajo cualquier sub-ruta del dominio.
+- **Rutas relativas:** el HTML usa `styles.css`, `main.js`, `config.js`, `supabaseClient.js`, `auth.js`, `carrito.js`, `orders.js`, `artistas.js`, `reproductor.js` con rutas relativas y los enlaces entre páginas también son relativos, así que funciona bajo cualquier sub-ruta del dominio.
+- **Supabase en producción:** como no hay bundler, las credenciales se escriben en `config.js` (no en `.env`). La anon key es pública por diseño; nunca poner la `service_role` en el navegador. En Supabase → Authentication → URL Configuration, define el Site URL y añade `https://alfonso-acuna.github.io/VallenatoStore-Sitio/**` como Redirect URL.
 - El repositorio antiguo `Alfonso-Acuna/vallenatostore` (versión single-page con `carrito.js`) está **intacto** y no debe tocarse.
 
 ---
@@ -238,11 +255,60 @@ Vigente desde el **19/10/2026**. Es la **fuente de verdad** de precios: los 24 p
 ## 12. Notas y convenciones para seguir modificando
 
 1. **Siempre mantener este `CONTEXTO.md` actualizado** tras cualquier cambio estructural o de datos.
-2. El navbar/footer se **duplican estáticamente** en las 7 páginas. Al cambiar un enlace del menú o un dato del footer (dirección, teléfono, redes, horario), repetirlo en **todas** las páginas y marcar el enlace activo de esa página con `aria-current="page"`. Mantener en las 7 el orden `main.js` → `carrito.js` y el bloque de Open Graph del `<head>`.
+2. El navbar/footer se **duplican estáticamente** en las 7 páginas. Al cambiar un enlace del menú o un dato del footer (dirección, teléfono, redes, horario), repetirlo en **todas** las páginas y marcar el enlace activo de esa página con `aria-current="page"`. Mantener en las 7 el orden `main.js` → SDK Supabase → `config.js` → `supabaseClient.js` → `carrito.js` → `auth.js` → `orders.js` y el bloque de Open Graph del `<head>`.
 3. JS en **ES5** (sin `const`/`let`/arrow). Nombres de clases con prefijo de componente (`artista-`, `ficha-`, `rep-`, `producto-`, `escucha-`, `top-`, `resumen-`, `paso-`).
 4. Si se agrega un artista/discografía: actualizar `ARTISTAS`, `ARTISTAS_FOTOS`, y si está en destacados/catálogo/escuchar/Top 10, también su pista en `reproductor.js`.
-5. Si se agrega un producto: replicar su título exacto en el catálogo (`catalogo.html`, en la columna `.producto-item` **con `data-formato` y `data-precio`**), en `PRUEBAS_PRODUCTOS` (reproductor.js) y en el mapa `PRODUCTOS` + `<select>` de `pedido.html`, **asignándole su precio según el esquema de la sección 6** (formato + categoría) en `.precio` y en `precio:`. Recordar el bloque JSON-LD de `catalogo.html` (sección 10).
+5. Si se agrega un producto: replicar su título exacto en el catálogo (`catalogo.html`, en la columna `.producto-item` **con `data-formato` y `data-precio`**), en `PRUEBAS_PRODUCTOS` (reproductor.js), en el mapa `PRODUCTOS` + `<select>` de `pedido.html` y en el `insert` de `products` de `supabase/schema.sql` (el `id` es el título exacto), **asignándole su precio según el esquema de la sección 6** (formato + categoría) en `.precio` y en `precio:`. Recordar el bloque JSON-LD de `catalogo.html` (sección 10).
 6. Respetar la paleta, el glassmorphism (`--vidrio`) y las miniaturas 1:1 definidas en `styles.css`.
 7. Accesibilidad y calidad: etiquetas `alt` descriptivas, `aria-label` en botones de icono, contraste AA y JS sin errores en consola.
-8. **Al crear una página nueva:** copiar navbar/footer de una existente, incluir `main.js` y `carrito.js`, y agregar el bloque Open Graph/Twitter Cards con su propio `title`, `description` y `url` (sección 10).
+8. **Al crear una página nueva:** copiar navbar/footer de una existente, incluir el bloque completo de scripts (sección 12.2), y agregar el bloque Open Graph/Twitter Cards con su propio `title`, `description` y `url` (sección 10).
 9. **Verificación:** el sitio se probó con Node + **jsdom** (fuera del repo) cubriendo: filtros y buscador del catálogo, contador y badge del carrito, persistencia en `localStorage`, resumen y desglose de `pedido.html` (incluida la URL de WhatsApp y `?producto=`), y el envío del contacto con EmailJS inactivo. Antes de publicar cambios de JS conviene revalidar esos flujos y `node --check` sobre cada archivo.
+10. **Supabase:** nunca editar las políticas RLS desde el frontend ni exponer la `service_role`. Si se cambia el esquema, actualizar `supabase/schema.sql` y volver a ejecutarlo (es idempotente). Si se renombra un producto, actualizar también su `id` en `products` porque el carrito usa el título como clave.
+
+---
+
+## 13. Supabase (autenticación, carrito y órdenes)
+
+### 13.1 Puesta en marcha
+
+1. Crear un proyecto en [supabase.com](https://supabase.com).
+2. Abrir **SQL Editor** y ejecutar completo `supabase/schema.sql`.
+3. Copiar **Project URL** y **anon public key** desde Project Settings → API.
+4. Escribirlos en `config.js`:
+   ```js
+   window.VALLENATO_CONFIG = {
+       SUPABASE_URL: 'https://tu-proyecto.supabase.co',
+       SUPABASE_ANON_KEY: 'eyJ...'
+   };
+   ```
+   `config.js` se carga antes de `supabaseClient.js`. No se usa `.env` porque el sitio no tiene bundler; `.env.example` queda como referencia.
+5. En Authentication → URL Configuration, configurar el Site URL (`https://alfonso-acuna.github.io/VallenatoStore-Sitio/`) y las Redirect URLs.
+6. Si se quiere probar sin confirmar correo, desactivar «Confirm email» en Authentication → Providers → Email. Con confirmación activa, el registro muestra el aviso de revisar el correo.
+
+### 13.2 Modelo de datos
+
+| Tabla | Clave | Relaciones y notas |
+| --- | --- | --- |
+| `profiles` | `id uuid` | 1:1 con `auth.users`; se crea con el trigger `on_auth_user_created`. |
+| `products` | `id text` | `id` = título exacto del álbum; seed de 24 productos. Lectura pública. |
+| `cart_items` | `id uuid` | `user_id → auth.users`, `product_id → products`; `UNIQUE(user_id, product_id)`. |
+| `orders` | `id uuid` | `user_id → auth.users`; `total_amount`, `status`, `created_at`. |
+| `order_items` | `id uuid` | `order_id → orders` (cascade), `product_id → products`, `quantity`, `unit_price`. |
+
+### 13.3 Seguridad (RLS)
+
+- `profiles`: cada usuario solo lee/actualiza su fila.
+- `products`: lectura para `anon` y `authenticated`; sin escritura desde el cliente.
+- `cart_items`: CRUD solo cuando `auth.uid() = user_id`.
+- `orders`: `select`/`insert` solo cuando `auth.uid() = user_id`.
+- `order_items`: `select`/`insert` solo si la orden padre pertenece al usuario.
+- Permisos SQL explícitos: `anon` solo `select` sobre `products`; `authenticated` accede a lo anterior. La `service_role` no se usa en el frontend.
+
+### 13.4 Flujos
+
+- **Invitado:** carrito en `localStorage`; el badge y `pedido.html` funcionan igual que antes; al confirmar se abre WhatsApp y se vacía el carrito local.
+- **Login/registro:** `auth.js` gestiona el modal y `onAuthStateChange`; al entrar se fusiona el carrito local con `cart_items` y se limpia el local.
+- **Perfil:** menú de cuenta → «Mi perfil» permite editar `full_name` (upsert en `profiles`); la navbar se actualiza al guardar.
+- **Usuario autenticado:** cada operación del carrito hace upsert/delete en `cart_items`; «Confirmar Pedido» crea `orders` + `order_items`, vacía el carrito remoto y abre WhatsApp con el desglose.
+- **Historial:** menú de cuenta → «Mis pedidos»; lee `orders` con `order_items` anidados y los pinta en un modal.
+- **Fallback:** si `config.js` está vacío o el SDK no carga, `auth.js` no inyecta controles y el sitio mantiene el comportamiento estático/WhatsApp.
